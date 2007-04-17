@@ -1,6 +1,6 @@
 %define name transmission
 %define version 0.7.0
-%define svn 1675
+%define svn 1733
 %if %svn
 %define release %mkrel 0.%svn.1
 %else
@@ -19,6 +19,7 @@ Source0: %{name}-%{svn}.tar.bz2
 Source0: %{name}-%{version}.tar.bz2
 %endif
 Patch0: transmission-0.7.0-fix-man-dir.patch
+Patch1: transmission-0.7.0-malformed-bencode.patch
 License: MIT
 Group: Networking/File transfer
 Url: http://transmission.m0k.org/
@@ -40,6 +41,7 @@ simple, intuitive interface on top of an efficient back-end.
 %setup -q
 %endif
 %patch0 -p0 -b .fixmandir
+%patch1 -p0 -b .malformed-bencode
 
 %build
 %configure
@@ -109,5 +111,3 @@ rm -rf $RPM_BUILD_ROOT
 %_liconsdir/%{name}.png
 %_iconsdir/%{name}.png
 %_miconsdir/%{name}.png
-
-
