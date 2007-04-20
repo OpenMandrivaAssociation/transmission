@@ -1,6 +1,6 @@
 %define name transmission
 %define version 0.7.0
-%define svn 1733
+%define svn 0
 %if %svn
 %define release %mkrel 0.%svn.1
 %else
@@ -50,7 +50,7 @@ simple, intuitive interface on top of an efficient back-end.
 %install
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
-%find_lang %name
+%find_lang %{name}
 
 bzip2 $RPM_BUILD_ROOT%_mandir/man1/%{name}cli.1
 
@@ -96,6 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(it) %_datadir/locale/it/LC_MESSAGES/transmission-gtk.mo
 %lang(bg) %_datadir/locale/bg/LC_MESSAGES/transmission-gtk.mo
 %lang(es) %_datadir/locale/es/LC_MESSAGES/transmission-gtk.mo
+%lang(fi) %_datadir/locale/fi/LC_MESSAGES/transmission-gtk.mo
 %lang(pl) %_datadir/locale/pl/LC_MESSAGES/transmission-gtk.mo
 %lang(ro) %_datadir/locale/ro/LC_MESSAGES/transmission-gtk.mo
 %lang(ru) %_datadir/locale/ru/LC_MESSAGES/transmission-gtk.mo
