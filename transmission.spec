@@ -1,5 +1,6 @@
 %define name transmission
-%define version 0.7.0
+%define origname Transmission
+%define version 0.72
 %define svn 0
 %if %svn
 %define release %mkrel 0.%svn.1
@@ -16,7 +17,7 @@ Release: %{release}
 %if %svn
 Source0: %{name}-%{svn}.tar.bz2
 %else
-Source0: %{name}-%{version}.tar.bz2
+Source0: %{origname}-%{version}.tar.bz2
 %endif
 Patch0: transmission-0.7.0-fix-man-dir.patch
 Patch1: transmission-0.7.0-malformed-bencode.patch
@@ -36,9 +37,9 @@ simple, intuitive interface on top of an efficient back-end.
 
 %prep
 %if %svn
-%setup -q -n %{name}-%{svn}
+%setup -q -n %{origname}
 %else
-%setup -q
+%setup -q -n %{origname}
 %endif
 %patch0 -p0 -b .fixmandir
 %patch1 -p0 -b .malformed-bencode
