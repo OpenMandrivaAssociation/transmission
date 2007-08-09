@@ -5,7 +5,7 @@
 %if %svn
 %define release %mkrel 0.%svn.1
 %else
-%define release %mkrel 1
+%define release %mkrel 2
 %endif
 %define major 0
 %define libname %mklibname %name %major
@@ -53,14 +53,6 @@ rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 %find_lang %{name}
 
-bzip2 $RPM_BUILD_ROOT%_mandir/man1/%{name}cli.1
-
-desktop-file-install --vendor="" \
-  --remove-category="FileTransfer" \
-  --remove-category="P2P" \
-  --add-category="X-MandrivaLinux-Internet-FileTransfer" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/transmission-gtk.desktop
-
 mkdir -p %buildroot{%_liconsdir,%_miconsdir}
 mkdir -p %buildroot%{_iconsdir}/hicolor
 mkdir -p %buildroot%{_iconsdir}/hicolor/{48x48,32x32,24x24,22x22,16x16}
@@ -105,11 +97,7 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/applications/transmission-gtk.desktop
 %_datadir/pixmaps/%{name}.png
 %_datadir/zsh/site-functions/_transmissioncli
-%_iconsdir/hicolor/16x16/apps/%{name}.png
-%_iconsdir/hicolor/22x22/apps/%{name}.png
-%_iconsdir/hicolor/24x24/apps/%{name}.png
-%_iconsdir/hicolor/32x32/apps/%{name}.png
-%_iconsdir/hicolor/48x48/apps/%{name}.png
+%_iconsdir/hicolor/*/apps/%{name}.png
 %_liconsdir/%{name}.png
 %_iconsdir/%{name}.png
 %_miconsdir/%{name}.png
