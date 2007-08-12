@@ -5,7 +5,7 @@
 %if %svn
 %define release %mkrel 0.%svn.1
 %else
-%define release %mkrel 2
+%define release %mkrel 3
 %endif
 %define major 0
 %define libname %mklibname %name %major
@@ -56,6 +56,8 @@ mkdir -p %buildroot%{_iconsdir}/hicolor/{48x48,32x32,16x16}/apps
 convert -scale 48 $RPM_BUILD_ROOT/usr/share/pixmaps/transmission.png %buildroot%_iconsdir/hicolor/48x48/apps/%{name}.png 
 convert -scale 32 $RPM_BUILD_ROOT/usr/share/pixmaps/transmission.png %buildroot%_iconsdir/hicolor/32x32/apps/%{name}.png
 convert -scale 16 $RPM_BUILD_ROOT/usr/share/pixmaps/transmission.png %buildroot%_iconsdir/hicolor/16x16/apps/%{name}.png
+
+perl -pi -e 's,transmission.png,%{name},g' %buildroot%_datadir/applications/transmission-gtk.desktop
 
 %post
 %update_icon_cache hicolor
