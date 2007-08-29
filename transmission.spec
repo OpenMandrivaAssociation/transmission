@@ -1,11 +1,11 @@
 %define name transmission
 %define origname Transmission
-%define version 0.80
+%define version 0.81
 %define svn 0
 %if %svn
 %define release %mkrel 0.%svn.1
 %else
-%define release %mkrel 3
+%define release %mkrel 1
 %endif
 %define major 0
 %define libname %mklibname %name %major
@@ -39,7 +39,7 @@ simple, intuitive interface on top of an efficient back-end.
 %if %svn
 %setup -q -n %{name}
 %else
-%setup -q
+%setup -q -c
 %endif
 %patch0 -p0 -b .fixmandir
 
@@ -91,8 +91,11 @@ rm -rf $RPM_BUILD_ROOT
 %lang(fi) %_datadir/locale/fi/LC_MESSAGES/transmission-gtk.mo
 %lang(nl) %_datadir/locale/nl/LC_MESSAGES/transmission-gtk.mo
 %lang(pl) %_datadir/locale/pl/LC_MESSAGES/transmission-gtk.mo
+%lang(pt) %_datadir/locale/pt/LC_MESSAGES/transmission-gtk.mo
+%lang(pt_BR) %_datadir/locale/pt_BR/LC_MESSAGES/transmission-gtk.mo
 %lang(ro) %_datadir/locale/ro/LC_MESSAGES/transmission-gtk.mo
 %lang(ru) %_datadir/locale/ru/LC_MESSAGES/transmission-gtk.mo
+%lang(sk) %_datadir/locale/sk/LC_MESSAGES/transmission-gtk.mo
 %lang(sv) %_datadir/locale/sv/LC_MESSAGES/transmission-gtk.mo
 %_datadir/applications/transmission-gtk.desktop
 %_datadir/pixmaps/%{name}.png
