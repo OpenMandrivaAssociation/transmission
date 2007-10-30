@@ -1,5 +1,5 @@
 %define name transmission
-%define version 0.90
+%define version 0.91
 %define svn 0
 %if %svn
 %define release %mkrel 0.%svn.1
