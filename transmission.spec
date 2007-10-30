@@ -77,4 +77,5 @@ rm -rf %{buildroot}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
 %{_iconsdir}/hicolor/*/apps/%{name}.png
+%{_mandir}/*/*
 
