@@ -1,10 +1,10 @@
 %define name transmission
-%define version 0.91
+%define version 0.92
 %define svn 0
 %if %svn
 %define release %mkrel 0.%svn.1
 %else
-%define release %mkrel 2
+%define release %mkrel 1
 %endif
 %define major 0
 %define libname %mklibname %name %major
@@ -49,7 +49,7 @@ rm -rf %{buildroot}
 %makeinstall_std
 %find_lang %{name}
 
-mkdir -p %buildroot%{_iconsdir}/hicolor/{48x48,32x32,16x16}/apps
+mkdir -p %{buildroot}%{_iconsdir}/hicolor/{48x48,32x32,16x16}/apps
 convert -scale 48 %{buildroot}/usr/share/pixmaps/transmission.png %buildroot%{_iconsdir}/hicolor/48x48/apps/%{name}.png 
 convert -scale 32 %{buildroot}/usr/share/pixmaps/transmission.png %buildroot%{_iconsdir}/hicolor/32x32/apps/%{name}.png
 convert -scale 16 %{buildroot}/usr/share/pixmaps/transmission.png %buildroot%{_iconsdir}/hicolor/16x16/apps/%{name}.png
