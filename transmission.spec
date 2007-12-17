@@ -21,7 +21,6 @@ Source0:	http://download.m0k.org/transmission/files/%{name}-%{version}.tar.bz2
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 URL:		http://transmission.m0k.org/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	gtk+2-devel
 BuildRequires:	bzip2
 BuildRequires:	openssl-devel
