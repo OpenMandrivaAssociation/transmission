@@ -1,17 +1,13 @@
-%define name transmission
-%define version 0.95
 %define svn 0
 %if %svn
 %define release %mkrel 0.%svn.1
 %else
 %define release %mkrel 1
 %endif
-%define major 0
-%define libname %mklibname %name %major
 
 Summary:	Simple Bittorrent client
-Name:		%{name}
-Version:	%{version}
+Name:		transmission
+Version:	0.96
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
