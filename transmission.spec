@@ -7,7 +7,7 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	1.05
+Version:	1.06
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
