@@ -7,7 +7,7 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	1.06
+Version:	1.11
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
@@ -70,6 +70,7 @@ rm -rf %{buildroot}
 %{_bindir}/%{name}-daemon
 %{_bindir}/%{name}-proxy
 %{_bindir}/%{name}-remote
+%{_bindir}/benc2php
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
 %{_iconsdir}/hicolor/*/apps/*
