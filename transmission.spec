@@ -1,13 +1,13 @@
 %define svn 0
 %if %svn
-%define release %mkrel 0.%svn.1
+%define release %mkrel 1
 %else
 %define release %mkrel 1
 %endif
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	1.20
+Version:	1.21
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
