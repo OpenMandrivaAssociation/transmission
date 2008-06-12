@@ -51,14 +51,18 @@ convert -scale 48 %{buildroot}/usr/share/pixmaps/transmission.png %buildroot%{_i
 convert -scale 32 %{buildroot}/usr/share/pixmaps/transmission.png %buildroot%{_iconsdir}/hicolor/32x32/apps/%{name}.png
 convert -scale 16 %{buildroot}/usr/share/pixmaps/transmission.png %buildroot%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 
+%if %mdkversion < 200900
 %post
 %{update_icon_cache hicolor}
 %{update_menus}
 %{update_desktop_database}
+%endif
+%if %mdkversion < 200900
 %postun
 %{clean_icon_cache hicolor}
 %{clean_menus}
 %{clean_desktop_database}
+%endif
 
 %clean
 rm -rf %{buildroot}
