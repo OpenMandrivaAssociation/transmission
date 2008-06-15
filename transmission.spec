@@ -7,7 +7,7 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	1.21
+Version:	1.22
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
@@ -16,7 +16,7 @@ Source0:	http://download.m0k.org/transmission/files/%{name}-%{version}.tar.bz2
 %endif
 License:	MIT and GPLv2
 Group:		Networking/File transfer
-URL:		http://transmission.m0k.org/
+URL:		http://www.transmissionbt.com/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	gtk+2-devel
 BuildRequires:	bzip2
