@@ -7,7 +7,7 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	1.22
+Version:	1.31
 Release:	%{release}
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
@@ -23,8 +23,8 @@ BuildRequires:	bzip2
 BuildRequires:	openssl-devel
 BuildRequires:	desktop-file-utils
 BuildRequires:	ImageMagick
-BuildRequires:	libevent-devel
 BuildRequires:	libcurl-devel
+BuildRequires:	libnotify-devel
 
 %description
 Transmission is a free, lightweight BitTorrent client. It features a 
@@ -69,13 +69,12 @@ rm -rf %{buildroot}
 
 %files -f %name.lang
 %defattr(-,root,root)
-%doc README NEWS LICENSE
+%doc README NEWS
 %{_bindir}/%{name}
 %{_bindir}/%{name}cli
 %{_bindir}/%{name}-daemon
-%{_bindir}/%{name}-proxy
 %{_bindir}/%{name}-remote
-%{_bindir}/benc2php
+%{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
 %{_iconsdir}/hicolor/*/apps/*
