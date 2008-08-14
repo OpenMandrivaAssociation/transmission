@@ -1,19 +1,23 @@
-%define svn 0
+%define svn	0
+%define rel	2
 %if %svn
-%define release %mkrel 1
+%define release		%mkrel 0.%svn.%rel
+%define distname	%{name}-%{svn}.tar.lzma
+%define dirname		%{name}
 %else
-%define release %mkrel 1
+%define release		%mkrel %rel
+%define distname	%{name}-%{version}.tar.bz2
+%define dirname		%{name}-%{version}
 %endif
 
 Summary:	Simple Bittorrent client
 Name:		transmission
 Version:	1.32
 Release:	%{release}
-%if %svn
-Source0:	%{name}-%{svn}.tar.bz2
-%else
-Source0:	http://download.m0k.org/transmission/files/%{name}-%{version}.tar.bz2
-%endif
+Source0:	http://download.m0k.org/transmission/files/%{distname}
+# From upstream SVN rev 6512: fix opening of torrent files from other
+# applications which may soon after delete them (e.g. Firefox)
+Patch0:		transmission-1.32-open.patch
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 URL:		http://www.transmissionbt.com/
@@ -31,11 +35,8 @@ Transmission is a free, lightweight BitTorrent client. It features a
 simple, intuitive interface on top of an efficient back-end.
 
 %prep
-%if %svn
-%setup -q -n %{name}
-%else
-%setup -q
-%endif
+%setup -q -n %{dirname}
+%patch0 -p0 -b .open
 
 %build
 %configure2_5x
