@@ -1,5 +1,5 @@
 %define svn	0
-%define rel	2
+%define rel	1
 %if %svn
 %define release		%mkrel 0.%svn.%rel
 %define distname	%{name}-%{svn}.tar.lzma
@@ -12,12 +12,9 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	1.32
+Version:	1.33
 Release:	%{release}
 Source0:	http://download.m0k.org/transmission/files/%{distname}
-# From upstream SVN rev 6512: fix opening of torrent files from other
-# applications which may soon after delete them (e.g. Firefox)
-Patch0:		transmission-1.32-open.patch
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 URL:		http://www.transmissionbt.com/
@@ -36,7 +33,6 @@ simple, intuitive interface on top of an efficient back-end.
 
 %prep
 %setup -q -n %{dirname}
-%patch0 -p0 -b .open
 
 %build
 %configure2_5x
