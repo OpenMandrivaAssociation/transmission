@@ -1,5 +1,5 @@
 %define svn	0
-%define rel	1
+%define rel	2
 %if %svn
 %define release		%mkrel 0.%svn.%rel
 %define distname	%{name}-%{svn}.tar.lzma
@@ -15,6 +15,9 @@ Name:		transmission
 Version:	1.33
 Release:	%{release}
 Source0:	http://download.m0k.org/transmission/files/%{distname}
+# Upstream patch fixing huge mem leak
+# via Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=499828
+Patch0:	transmission-1.33-fix-memleak.patch
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 URL:		http://www.transmissionbt.com/
@@ -33,6 +36,7 @@ simple, intuitive interface on top of an efficient back-end.
 
 %prep
 %setup -q -n %{dirname}
+%patch0 -p1 -b .memleak
 
 %build
 %configure2_5x
