@@ -12,12 +12,9 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	1.34
+Version:	1.40
 Release:	%{release}
 Source0:	http://download.m0k.org/transmission/files/%{distname}
-# Upstream patch fixing huge mem leak
-# via Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=499828
-Patch0:	transmission-1.33-fix-memleak.patch
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 URL:		http://www.transmissionbt.com/
@@ -36,7 +33,6 @@ simple, intuitive interface on top of an efficient back-end.
 
 %prep
 %setup -q -n %{dirname}
-%patch0 -p1 -b .memleak
 
 %build
 %configure2_5x
@@ -48,9 +44,9 @@ rm -rf %{buildroot}
 %find_lang %{name}
 
 mkdir -p %{buildroot}%{_iconsdir}/hicolor/{48x48,32x32,16x16}/apps
-convert -scale 48 %{buildroot}/usr/share/pixmaps/transmission.png %buildroot%{_iconsdir}/hicolor/48x48/apps/%{name}.png 
-convert -scale 32 %{buildroot}/usr/share/pixmaps/transmission.png %buildroot%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-convert -scale 16 %{buildroot}/usr/share/pixmaps/transmission.png %buildroot%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+convert -scale 48 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png 
+convert -scale 32 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+convert -scale 16 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 
 %if %mdkversion < 200900
 %post
