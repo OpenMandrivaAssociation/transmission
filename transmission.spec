@@ -26,6 +26,7 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	ImageMagick
 BuildRequires:	libcurl-devel
 BuildRequires:	libnotify-devel
+BuildRequires:	intltool
 
 %description
 Transmission is a free, lightweight BitTorrent client. It features a 
