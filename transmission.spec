@@ -23,7 +23,7 @@ BuildRequires:	gtk+2-devel
 BuildRequires:	bzip2
 BuildRequires:	openssl-devel
 BuildRequires:	desktop-file-utils
-BuildRequires:	ImageMagick
+BuildRequires:	imagemagick
 BuildRequires:	libcurl-devel
 BuildRequires:	libnotify-devel
 BuildRequires:	intltool
