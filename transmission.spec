@@ -1,5 +1,5 @@
 %define svn	0
-%define rel	2
+%define rel	3
 %if %svn
 %define release		%mkrel 0.%svn.%rel
 %define distname	%{name}-%{svn}.tar.lzma
@@ -27,10 +27,12 @@ BuildRequires:	imagemagick
 BuildRequires:	libcurl-devel
 BuildRequires:	libnotify-devel
 BuildRequires:	intltool
-# Old, unmaintained client that used old wx: transmission is as good
+# Old, unmaintained clients that used old wx: transmission is as good
 # an upgrade path as any - AdamW 2008/12
 Obsoletes:	BitTornado <= 0:0.3.18-4
 Provides:	BitTornado
+Obsoletes:	bittorrent-gui <= 5.2.2-3
+Provides:	bittorrent-gui
 
 %description
 Transmission is a free, lightweight BitTorrent client. It features a 
