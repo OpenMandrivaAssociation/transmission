@@ -12,7 +12,7 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	1.61
+Version:	1.70
 Release:	%{release}
 Source0:	http://download.m0k.org/transmission/files/%{distname}
 License:	MIT and GPLv2
@@ -26,6 +26,7 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
 BuildRequires:	libcurl-devel
 BuildRequires:	libnotify-devel
+BuildRequires:	libevent-devel
 BuildRequires:	intltool
 # Old, unmaintained clients that used old wx: transmission is as good
 # an upgrade path as any - AdamW 2008/12
