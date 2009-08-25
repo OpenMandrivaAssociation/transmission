@@ -20,6 +20,7 @@ Group:		Networking/File transfer
 URL:		http://www.transmissionbt.com/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	gtk+2-devel
+BuildRequires:	qt4-devel
 BuildRequires:	bzip2
 BuildRequires:	openssl-devel
 BuildRequires:	desktop-file-utils
@@ -28,16 +29,76 @@ BuildRequires:	libcurl-devel
 BuildRequires:	libnotify-devel
 BuildRequires:	libevent-devel
 BuildRequires:	intltool
-# Old, unmaintained clients that used old wx: transmission is as good
-# an upgrade path as any - AdamW 2008/12
-Obsoletes:	BitTornado <= 0:0.3.18-4
-Provides:	BitTornado
-Obsoletes:	bittorrent-gui <= 5.2.2-3
-Provides:	bittorrent-gui
 
 %description
 Transmission is a free, lightweight BitTorrent client. It features a 
 simple, intuitive interface on top of an efficient back-end.
+
+%package common
+Summary: Common files for Transmission Bittorrent client
+Group:  Networking/File transfer
+Conflicts: transmission < 1.74
+
+%description common
+Transmission is a free, lightweight BitTorrent client. This package
+contains the common files used by the different front-ends.
+
+
+%package cli
+Summary: Command line interface for Transmission BitTorrent client
+Group:	Networking/File transfer
+Requires: %{name}-common = %{version}
+Conflicts: transmission < 1.74
+
+%description cli
+Transmission is a free, lightweight BitTorrent client. This package
+contains the command line interface front-end.
+
+
+%package gtk
+Summary: GTK Interface for Transmission BitTorrent client
+Group:	Networking/File transfer
+Requires:	%{name}-common = %{version}
+Provides:	%{name} = %{name}-%{version}
+Obsoletes:	transmission < 1.74-1
+# Old, unmaintained clients that used old wx: transmission is as good
+# an upgrade path as any - AdamW 2008/12
+Obsoletes:	BitTornado <= 0:0.3.18-4
+Obsoletes:	bittorrent-gui <= 5.2.2-3
+
+%description gtk
+Transmission is a free, lightweight BitTorrent client. It features a
+simple, intuitive interface on top of an efficient back-end.
+
+This package provides the GTK Interface.
+
+
+%package qt4
+Summary: Qt4 Interface for Transmission BitTorrent client
+Group:	Networking/File transfer
+Requires: %{name}-common = %{version}
+
+%description qt4
+Transmission is a simple BitTorrent client. It features a very simple,
+intuitive interface (gui and command-line) on top on an efficient,
+cross-platform back-end.
+
+This package contains QTransmission, a QT4 based GUI for Transmission
+loosely based on the GTK+ client.
+
+
+%package daemon
+Summary: Qt4 Interface for Transmission BitTorrent client
+Group:  Networking/File transfer
+Requires: %{name}-common = %{version}
+
+%description daemon
+Transmission is a simple BitTorrent client. It features a very simple,
+intuitive interface (gui and command-line) on top on an efficient,
+cross-platform back-end.
+
+This package contains the transmission-daemon.
+
 
 %prep
 %setup -q -n %{dirname}
@@ -45,6 +106,12 @@ simple, intuitive interface on top of an efficient back-end.
 %build
 %configure2_5x
 %make
+
+#QT Gui
+pushd qt
+%qmake_qt4 qtr.pro
+%make
+popd
 
 %install
 rm -rf %{buildroot}
@@ -56,31 +123,41 @@ convert -scale 48 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{
 convert -scale 32 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
 convert -scale 16 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 
-%if %mdkversion < 200900
-%post
-%{update_icon_cache hicolor}
-%{update_menus}
-%{update_desktop_database}
-%endif
-%if %mdkversion < 200900
-%postun
-%{clean_icon_cache hicolor}
-%{clean_menus}
-%{clean_desktop_database}
-%endif
+#Qt Gui Installation
+pushd qt
+INSTALL_ROOT=%{buildroot}%{_prefix} make install
+popd
+
+# Creating the desktop file for qt4 gui based on the GTK one
+sed -e 's,Exec=transmission,Exec=qtr,g' -e 's,GTK,QT,g'  < %{buildroot}/%{_datadir}/applications/%{name}.desktop > %{buildroot}/%{_datadir}/applications/mandriva-%{name}-qtr.desktop
 
 %clean
 rm -rf %{buildroot}
 
-%files -f %name.lang
-%defattr(-,root,root)
-%doc README NEWS
-%{_bindir}/%{name}
-%{_bindir}/%{name}cli
-%{_bindir}/%{name}-daemon
-%{_bindir}/%{name}-remote
+%files common
+%doc README NEWS AUTHORS
 %{_datadir}/%{name}
-%{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
 %{_iconsdir}/hicolor/*/apps/*
-%{_mandir}/*/*
+
+%files cli
+%defattr(-,root,root)
+%{_bindir}/%{name}cli
+%{_bindir}/%{name}-remote
+%{_mandir}/man1/transmission-remote.1*
+%{_mandir}/man1/transmissioncli.1*
+
+%files daemon
+%{_bindir}/transmission-daemon
+%{_mandir}/man1/transmission-daemon.1*
+
+%files gtk -f %{name}.lang
+%defattr(-,root,root)
+%{_bindir}/%{name}
+%{_datadir}/applications/%{name}.desktop
+%{_mandir}/man1/transmission.1*
+
+%files qt4
+%defattr(-,root,root)
+%{_bindir}/qtr
+%{_datadir}/applications/mandriva-%{name}-qtr.desktop
