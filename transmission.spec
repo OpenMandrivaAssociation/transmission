@@ -35,9 +35,9 @@ Transmission is a free, lightweight BitTorrent client. It features a
 simple, intuitive interface on top of an efficient back-end.
 
 %package common
-Summary: 	Common files for Transmission Bittorrent client
-Group:  	Networking/File transfer
-Conflicts: 	transmission < 1.74
+Summary:	Common files for Transmission Bittorrent client
+Group:		Networking/File transfer
+Conflicts:	transmission < 1.74
 
 %description common
 Transmission is a free, lightweight BitTorrent client. This package
@@ -45,10 +45,10 @@ contains the common files used by the different front-ends.
 
 
 %package cli
-Summary: 	Command line interface for Transmission BitTorrent client
+Summary:	Command line interface for Transmission BitTorrent client
 Group:		Networking/File transfer
-Requires: 	%{name}-common = %{version}
-Conflicts: 	transmission < 1.74
+Requires:	%{name}-common = %{version}
+Conflicts:	transmission < 1.74
 
 %description cli
 Transmission is a free, lightweight BitTorrent client. This package
@@ -56,11 +56,11 @@ contains the command line interface front-end.
 
 
 %package gtk
-Summary: 	GTK Interface for Transmission BitTorrent client
+Summary:	GTK Interface for Transmission BitTorrent client
 Group:		Networking/File transfer
 Requires:	%{name}-common = %{version}
 Provides:	%{name} = %{name}-%{version}
-Provides	%{name}-gui = %{version}-%{release}
+Provides:	%{name}-gui = %{version}-%{release}
 Obsoletes:	transmission < 1.74-1
 # Old, unmaintained clients that used old wx: transmission is as good
 # an upgrade path as any - AdamW 2008/12
@@ -131,12 +131,13 @@ INSTALL_ROOT=%{buildroot}%{_prefix} make install
 popd
 
 # Creating the desktop file for qt4 gui based on the GTK one
-sed -e 's,Exec=transmission,Exec=qtr,g' -e 's,GTK,QT,g'  < %{buildroot}/%{_datadir}/applications/%{name}.desktop > %{buildroot}/%{_datadir}/applications/mandriva-%{name}-qtr.desktop
+sed -e 's,Exec=transmission,Exec=qtr,g' -e 's,GTK,QT,g' < %{buildroot}/%{_datadir}/applications/%{name}.desktop > %{buildroot}/%{_datadir}/applications/mandriva-%{name}-qtr.desktop
 
 %clean
 rm -rf %{buildroot}
 
 %files common
+%defattr(-,root,root)
 %doc README NEWS AUTHORS
 %{_datadir}/%{name}
 %{_datadir}/pixmaps/%{name}.png
@@ -150,6 +151,7 @@ rm -rf %{buildroot}
 %{_mandir}/man1/transmissioncli.1*
 
 %files daemon
+%defattr(-,root,root)
 %{_bindir}/transmission-daemon
 %{_mandir}/man1/transmission-daemon.1*
 
