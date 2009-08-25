@@ -77,7 +77,7 @@ This package provides the GTK Interface.
 %package qt4
 Summary:	Qt4 Interface for Transmission BitTorrent client
 Group:		Networking/File transfer
-Provides	%{name}-gui = %{version}-%{release}
+Provides:	%{name}-gui = %{version}-%{release}
 Requires:	%{name}-common = %{version}
 
 %description qt4
