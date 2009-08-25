@@ -6,13 +6,13 @@
 %define dirname		%{name}
 %else
 %define release		%mkrel %rel
-%define distname	%{name}-%{version}.tar.bz2
+%define distname	%{name}-%{version}.tar.lzma
 %define dirname		%{name}-%{version}
 %endif
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	1.73
+Version:	1.74
 Release:	%{release}
 Source0:	http://download.m0k.org/transmission/files/%{distname}
 License:	MIT and GPLv2
