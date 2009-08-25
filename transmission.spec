@@ -1,5 +1,5 @@
 %define svn	0
-%define rel	1
+%define rel	2
 %if %svn
 %define release		%mkrel 0.%svn.%rel
 %define distname	%{name}-%{svn}.tar.lzma
@@ -35,9 +35,9 @@ Transmission is a free, lightweight BitTorrent client. It features a
 simple, intuitive interface on top of an efficient back-end.
 
 %package common
-Summary: Common files for Transmission Bittorrent client
-Group:  Networking/File transfer
-Conflicts: transmission < 1.74
+Summary: 	Common files for Transmission Bittorrent client
+Group:  	Networking/File transfer
+Conflicts: 	transmission < 1.74
 
 %description common
 Transmission is a free, lightweight BitTorrent client. This package
@@ -45,10 +45,10 @@ contains the common files used by the different front-ends.
 
 
 %package cli
-Summary: Command line interface for Transmission BitTorrent client
-Group:	Networking/File transfer
-Requires: %{name}-common = %{version}
-Conflicts: transmission < 1.74
+Summary: 	Command line interface for Transmission BitTorrent client
+Group:		Networking/File transfer
+Requires: 	%{name}-common = %{version}
+Conflicts: 	transmission < 1.74
 
 %description cli
 Transmission is a free, lightweight BitTorrent client. This package
@@ -56,10 +56,11 @@ contains the command line interface front-end.
 
 
 %package gtk
-Summary: GTK Interface for Transmission BitTorrent client
-Group:	Networking/File transfer
+Summary: 	GTK Interface for Transmission BitTorrent client
+Group:		Networking/File transfer
 Requires:	%{name}-common = %{version}
 Provides:	%{name} = %{name}-%{version}
+Provides	%{name}-gui = %{version}-%{release}
 Obsoletes:	transmission < 1.74-1
 # Old, unmaintained clients that used old wx: transmission is as good
 # an upgrade path as any - AdamW 2008/12
@@ -74,9 +75,10 @@ This package provides the GTK Interface.
 
 
 %package qt4
-Summary: Qt4 Interface for Transmission BitTorrent client
-Group:	Networking/File transfer
-Requires: %{name}-common = %{version}
+Summary:	Qt4 Interface for Transmission BitTorrent client
+Group:		Networking/File transfer
+Provides	%{name}-gui = %{version}-%{release}
+Requires:	%{name}-common = %{version}
 
 %description qt4
 Transmission is a simple BitTorrent client. It features a very simple,
@@ -88,9 +90,9 @@ loosely based on the GTK+ client.
 
 
 %package daemon
-Summary: Qt4 Interface for Transmission BitTorrent client
-Group:  Networking/File transfer
-Requires: %{name}-common = %{version}
+Summary:	Qt4 Interface for Transmission BitTorrent client
+Group:		Networking/File transfer
+Requires:	%{name}-common = %{version}
 
 %description daemon
 Transmission is a simple BitTorrent client. It features a very simple,
