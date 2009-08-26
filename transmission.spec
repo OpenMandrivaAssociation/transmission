@@ -1,5 +1,5 @@
 %define svn	0
-%define rel	2
+%define rel	3
 %if %svn
 %define release		%mkrel 0.%svn.%rel
 %define distname	%{name}-%{svn}.tar.lzma
@@ -59,7 +59,7 @@ contains the command line interface front-end.
 Summary:	GTK Interface for Transmission BitTorrent client
 Group:		Networking/File transfer
 Requires:	%{name}-common = %{version}
-Provides:	%{name} = %{name}-%{version}
+Provides:	%{name} = %{version}-%{release}
 Provides:	%{name}-gui = %{version}-%{release}
 Obsoletes:	transmission < 1.74-1
 # Old, unmaintained clients that used old wx: transmission is as good
