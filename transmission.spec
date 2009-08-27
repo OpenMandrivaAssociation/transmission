@@ -131,7 +131,7 @@ INSTALL_ROOT=%{buildroot}%{_prefix} make install
 popd
 
 # Creating the desktop file for qt4 gui based on the GTK one
-sed -e 's,Exec=transmission,Exec=qtr,g' -e 's,GTK,QT,g' < %{buildroot}/%{_datadir}/applications/%{name}.desktop > %{buildroot}/%{_datadir}/applications/mandriva-%{name}-qtr.desktop
+sed -e 's,Exec=transmission,Exec=qtr,g' -e 's,GTK,Qt,g' < %{buildroot}/%{_datadir}/applications/%{name}.desktop > %{buildroot}/%{_datadir}/applications/mandriva-%{name}-qtr.desktop
 
 %clean
 rm -rf %{buildroot}
