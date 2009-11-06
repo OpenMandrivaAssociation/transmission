@@ -2,17 +2,17 @@
 %define rel	1
 %if %svn
 %define release		%mkrel 0.%svn.%rel
-%define distname	%{name}-%{svn}.tar.lzma
+%define distname	%{name}-%{svn}.tar.xz
 %define dirname		%{name}
 %else
 %define release		%mkrel %rel
-%define distname	%{name}-%{version}.tar.lzma
+%define distname	%{name}-%{version}.tar.xz
 %define dirname		%{name}-%{version}
 %endif
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	1.75
+Version:	1.76
 Release:	%{release}
 Source0:	http://download.m0k.org/transmission/files/%{distname}
 License:	MIT and GPLv2
