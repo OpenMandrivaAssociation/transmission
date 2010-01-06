@@ -1,5 +1,5 @@
 %define svn	0
-%define rel	2
+%define rel	1
 %if %svn
 %define release		%mkrel 0.%svn.%rel
 %define distname	%{name}-%{svn}.tar.xz
@@ -12,7 +12,7 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	1.76
+Version:	1.77
 Release:	%{release}
 Source0:	http://download.m0k.org/transmission/files/%{distname}
 License:	MIT and GPLv2
