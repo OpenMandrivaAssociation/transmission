@@ -12,7 +12,7 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	1.90
+Version:	1.91
 Release:	%{release}
 Source0:	http://download.m0k.org/transmission/files/%{distname}
 License:	MIT and GPLv2
