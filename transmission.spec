@@ -1,5 +1,5 @@
 %define svn	0
-%define rel	1
+%define rel	2
 %if %svn
 %define release		%mkrel 0.%svn.%rel
 %define distname	%{name}-%{svn}.tar.xz
@@ -15,6 +15,7 @@ Name:		transmission
 Version:	1.91
 Release:	%{release}
 Source0:	http://download.m0k.org/transmission/files/%{distname}
+Patch0:		use-system-libevent-fix-optflags-patch
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 URL:		http://www.transmissionbt.com/
@@ -104,6 +105,7 @@ This package contains the transmission-daemon.
 
 %prep
 %setup -q -n %{dirname}
+%patch0 -p1
 
 %build
 %configure2_5x
