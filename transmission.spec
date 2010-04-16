@@ -1,5 +1,5 @@
 %define svn	0
-%define rel	5
+%define rel	1
 %if %svn
 %define release		%mkrel 0.%svn.%rel
 %define distname	%{name}-%{svn}.tar.xz
@@ -12,7 +12,7 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	1.91
+Version:	1.92
 Release:	%{release}
 Source0:	http://download.m0k.org/transmission/files/%{distname}
 Patch0:		use-system-libevent-fix-optflags-patch
