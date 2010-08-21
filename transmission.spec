@@ -12,7 +12,7 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.03
+Version:	2.04
 Release:	%{release}
 Source0:	http://download.m0k.org/transmission/files/%{distname}
 Patch0:		use-system-libevent-fix-optflags-patch
