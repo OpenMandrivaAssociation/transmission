@@ -12,7 +12,7 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.11
+Version:	2.12
 Release:	%{release}
 Source0:	http://download.m0k.org/transmission/files/%{distname}
 Patch0:		transmission-2.11-fix-optflags.patch
