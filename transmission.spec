@@ -1,21 +1,8 @@
-%define svn	0
-%define rel	2
-%if %svn
-%define release		%mkrel 0.%svn.%rel
-%define distname	%{name}-%{svn}.tar.xz
-%define dirname		%{name}
-%else
-%define release		%mkrel %rel
-%define distname	%{name}-%{version}.tar.xz
-%define dirname		%{name}-%{version}
-%endif
-
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.12
-Release:	%{release}
-Source0:	http://download.m0k.org/transmission/files/%{distname}
-Patch0:		transmission-2.11-fix-optflags.patch
+Version:	2.22
+Release:	%mkrel 1
+Source0:	http://download.m0k.org/transmission/files/%{name}-%{version}.tar.xz
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 URL:		http://www.transmissionbt.com/
@@ -30,6 +17,9 @@ BuildRequires:	libcurl-devel
 BuildRequires:	libnotify-devel
 BuildRequires:	libevent-devel
 BuildRequires:	intltool
+BuildRequires:	libGConf2-devel
+BuildRequires:	libcanberra-gtk-devel
+BuildRequires:	dbus-glib-devel
 
 %description
 Transmission is a free, lightweight BitTorrent client. It features a 
@@ -104,8 +94,7 @@ This package contains the transmission-daemon.
 
 
 %prep
-%setup -q -n %{dirname}
-%patch0 -p1
+%setup -q -n %{name}-%{version}
 
 %build
 %configure2_5x
