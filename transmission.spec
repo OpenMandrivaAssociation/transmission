@@ -1,7 +1,7 @@
 Summary:	Simple Bittorrent client
 Name:		transmission
 Version:	2.22
-Release:	%mkrel 1
+Release:	%mkrel 2
 Source0:	http://download.m0k.org/transmission/files/%{name}-%{version}.tar.xz
 License:	MIT and GPLv2
 Group:		Networking/File transfer
