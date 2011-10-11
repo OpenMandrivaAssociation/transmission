@@ -1,8 +1,8 @@
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.31
+Version:	2.41
 Release:	%mkrel 1
-Source0:	http://download.m0k.org/transmission/files/%{name}-%{version}.tar.xz
+Source0:	http://download.transmissionbt.com/files/%{name}-%{version}.tar.xz
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 URL:		http://www.transmissionbt.com/
