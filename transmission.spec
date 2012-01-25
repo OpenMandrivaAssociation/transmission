@@ -1,12 +1,11 @@
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.41
-Release:	%mkrel 1
+Version:	2.42
+Release:	1
 Source0:	http://download.transmissionbt.com/files/%{name}-%{version}.tar.xz
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 URL:		http://www.transmissionbt.com/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	gtk+2-devel
 BuildRequires:	qt4-devel >= 4:4.6.0
 BuildRequires:	bzip2
@@ -107,7 +106,6 @@ pushd qt
 popd
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 %find_lang %{name}-gtk
 
@@ -124,18 +122,13 @@ popd
 # Install transmission-qt.desktop manually as make install doesn't install it:
 cp -a qt/transmission-qt.desktop %{buildroot}/%{_datadir}/applications/
 
-%clean
-rm -rf %{buildroot}
-
 %files common
-%defattr(-,root,root)
 %doc README NEWS AUTHORS
 %{_datadir}/%{name}
 %{_datadir}/pixmaps/%{name}.png
 %{_iconsdir}/hicolor/*/apps/*
 
 %files cli
-%defattr(-,root,root)
 %{_bindir}/%{name}-cli
 %{_bindir}/%{name}-create
 %{_bindir}/%{name}-edit
@@ -148,18 +141,15 @@ rm -rf %{buildroot}
 %{_mandir}/man1/%{name}-show.1*
 
 %files daemon
-%defattr(-,root,root)
 %{_bindir}/%{name}-daemon
 %{_mandir}/man1/%{name}-daemon.1*
 
 %files gtk -f %{name}-gtk.lang
-%defattr(-,root,root)
 %{_bindir}/%{name}-gtk
 %{_datadir}/applications/%{name}-gtk.desktop
 %{_mandir}/man1/%{name}-gtk.1*
 
 %files qt4
-%defattr(-,root,root)
 %{_bindir}/%{name}-qt
 %{_datadir}/applications/%{name}-qt.desktop
 %{_mandir}/man1/%{name}-qt.1*
