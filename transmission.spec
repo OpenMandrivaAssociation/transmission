@@ -1,24 +1,21 @@
+%bcond_without gtk
+
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.42
+Version:	2.50
 Release:	1
 Source0:	http://download.transmissionbt.com/files/%{name}-%{version}.tar.xz
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 URL:		http://www.transmissionbt.com/
-BuildRequires:	gtk+2-devel
 BuildRequires:	qt4-devel >= 4:4.6.0
 BuildRequires:	bzip2
 BuildRequires:	openssl-devel
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
 BuildRequires:	libcurl-devel
-BuildRequires:	libnotify-devel
 BuildRequires:	libevent-devel
 BuildRequires:	intltool
-BuildRequires:	libGConf2-devel
-BuildRequires:	libcanberra-gtk-devel
-BuildRequires:	dbus-glib-devel
 
 %description
 Transmission is a free, lightweight BitTorrent client. It features a 
@@ -45,9 +42,15 @@ Transmission is a free, lightweight BitTorrent client. This package
 contains the command line interface front-end.
 
 
+%if %with gtk
 %package gtk
 Summary:	GTK Interface for Transmission BitTorrent client
 Group:		Networking/File transfer
+BuildRequires:	gtk+2-devel
+BuildRequires:	libGConf2-devel
+BuildRequires:	libcanberra-gtk-devel
+BuildRequires:	dbus-glib-devel
+BuildRequires:	libnotify-devel
 Requires:	%{name}-common = %{version}
 Provides:	%{name} = %{version}-%{release}
 Provides:	%{name}-gui = %{version}-%{release}
@@ -62,6 +65,7 @@ Transmission is a free, lightweight BitTorrent client. It features a
 simple, intuitive interface on top of an efficient back-end.
 
 This package provides the GTK Interface.
+%endif
 
 
 %package qt4
@@ -96,7 +100,7 @@ This package contains the transmission-daemon.
 %setup -q -n %{name}-%{version}
 
 %build
-%configure2_5x
+%configure
 %make
 
 #QT Gui
@@ -107,7 +111,9 @@ popd
 
 %install
 %makeinstall_std
+%if %with gtk
 %find_lang %{name}-gtk
+%endif
 
 mkdir -p %{buildroot}%{_iconsdir}/hicolor/{48x48,32x32,16x16}/apps
 convert -scale 48 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png 
@@ -144,10 +150,12 @@ cp -a qt/transmission-qt.desktop %{buildroot}/%{_datadir}/applications/
 %{_bindir}/%{name}-daemon
 %{_mandir}/man1/%{name}-daemon.1*
 
+%if %with gtk
 %files gtk -f %{name}-gtk.lang
 %{_bindir}/%{name}-gtk
 %{_datadir}/applications/%{name}-gtk.desktop
 %{_mandir}/man1/%{name}-gtk.1*
+%endif
 
 %files qt4
 %{_bindir}/%{name}-qt
