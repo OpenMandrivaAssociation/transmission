@@ -55,7 +55,7 @@ Summary:	GTK Interface for Transmission BitTorrent client
 Group:		Networking/File transfer
 BuildRequires:	gtk+2-devel
 BuildRequires:	libGConf2-devel
-BuildRequires:	libcanberra-gtk-devel
+BuildRequires:	pkgconfig(libcanberra-gtk)
 BuildRequires:	dbus-glib-devel
 BuildRequires:	libnotify-devel
 Requires:	%{name}-common = %{version}
