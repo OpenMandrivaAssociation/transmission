@@ -1,13 +1,20 @@
 %bcond_without gtk
 
+%define rel	1
+
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.50
-Release:	1
+Version:	2.51
+%if %{mdvver} >= 201100
+Release:	%{rel}
+%else
+Release:	%mkrel %{rel}
+%endif
 Source0:	http://download.transmissionbt.com/files/%{name}-%{version}.tar.xz
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 URL:		http://www.transmissionbt.com/
+Patch0:		transmission-2.51-mdv-desktop.patch
 BuildRequires:	qt4-devel >= 4:4.6.0
 BuildRequires:	bzip2
 BuildRequires:	openssl-devel
@@ -98,6 +105,7 @@ This package contains the transmission-daemon.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0 -p1
 
 %build
 %configure
