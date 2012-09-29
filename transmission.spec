@@ -4,7 +4,7 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.61
+Version:	2.71
 %if %{mdvver} >= 201100
 Release:	%{rel}
 %else
