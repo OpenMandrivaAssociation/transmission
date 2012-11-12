@@ -1,0 +1,12 @@
+Index: transmission-2.51/qt/transmission-qt.desktop
+===================================================================
+--- transmission-2.51.orig/qt/transmission-qt.desktop
++++ transmission-2.51/qt/transmission-qt.desktop
+@@ -12,7 +12,7 @@ X-AppInstall-Keywords=torrent
+ Actions=Minimize;
+ 
+ [Desktop Action Minimize]
+-_Name=Start Transmission Minimized
++Name=Start Transmission Minimized
+ Exec=transmission-qt --minimized
+ OnlyShowIn=Unity;
