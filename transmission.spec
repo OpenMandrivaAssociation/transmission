@@ -2,24 +2,20 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.71
-%if %{mdvver} >= 201100
-Release:	2
-%else
-Release:	%mkrel 2
-%endif
+Version:	2.72
+Release:	1
+Source0:	http://download.transmissionbt.com/files/%{name}-%{version}.tar.xz
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 URL:		http://www.transmissionbt.com/
-Source0:	http://download.transmissionbt.com/files/%{name}-%{version}.tar.xz
 Patch0:		transmission-2.51-mdv-desktop.patch
 BuildRequires:	qt4-devel >= 4:4.6.0
 BuildRequires:	bzip2
-BuildRequires:	openssl-devel
+BuildRequires:	pkgconfig(openssl)
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
-BuildRequires:	libcurl-devel
-BuildRequires:	libevent-devel
+BuildRequires:	pkgconfig(libcurl)
+BuildRequires:	pkgconfig(libevent)
 BuildRequires:	intltool
 
 %description
@@ -39,7 +35,7 @@ contains the common files used by the different front-ends.
 %package cli
 Summary:	Command line interface for Transmission BitTorrent client
 Group:		Networking/File transfer
-Requires:	%{name}-common = %{version}-%{release}
+Requires:	%{name}-common = %{version}
 Conflicts:	transmission < 1.74
 
 %description cli
@@ -54,9 +50,9 @@ Group:		Networking/File transfer
 BuildRequires:	gtk+2-devel
 BuildRequires:	libGConf2-devel
 BuildRequires:	pkgconfig(libcanberra-gtk)
-BuildRequires:	dbus-glib-devel
-BuildRequires:	libnotify-devel
-Requires:	%{name}-common = %{version}-%{release}
+BuildRequires:	pkgconfig(ndesk-dbus-glib-1.0)
+BuildRequires:	pkgconfig(libnotify)
+Requires:	%{name}-common = %{version}
 Provides:	%{name} = %{version}-%{release}
 Provides:	%{name}-gui = %{version}-%{release}
 Obsoletes:	transmission < 1.74-1
@@ -77,7 +73,7 @@ This package provides the GTK Interface.
 Summary:	Qt4 Interface for Transmission BitTorrent client
 Group:		Networking/File transfer
 Provides:	%{name}-gui = %{version}-%{release}
-Requires:	%{name}-common = %{version}-%{release}
+Requires:	%{name}-common = %{version}
 
 %description qt4
 Transmission is a simple BitTorrent client. It features a very simple,
@@ -89,9 +85,9 @@ loosely based on the GTK+ client.
 
 
 %package daemon
-Summary:	Daemon for Transmission BitTorrent client
+Summary:	Qt4 Interface for Transmission BitTorrent client
 Group:		Networking/File transfer
-Requires:	%{name}-common = %{version}-%{release}
+Requires:	%{name}-common = %{version}
 
 %description daemon
 Transmission is a simple BitTorrent client. It features a very simple,
@@ -106,16 +102,13 @@ This package contains the transmission-daemon.
 %patch0 -p1
 
 %build
-%configure2_5x
+%configure
 %make
 
 #QT Gui
 pushd qt
 %qmake_qt4 qtr.pro
 %make
-pushd translations
-for i in `ls *.ts`; do lrelease $i ; done
-popd
 popd
 
 %install
@@ -132,10 +125,6 @@ convert -scale 16 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{
 #Qt Gui Installation
 pushd qt
 INSTALL_ROOT=%{buildroot}%{_prefix} make install
-pushd translations
-mkdir -p %{buildroot}%{_qt4_translationdir}
-cp *.qm %{buildroot}%{_qt4_translationdir}
-popd
 popd
 
 # Install transmission-qt.desktop manually as make install doesn't install it:
@@ -174,5 +163,3 @@ cp -a qt/transmission-qt.desktop %{buildroot}/%{_datadir}/applications/
 %{_bindir}/%{name}-qt
 %{_datadir}/applications/%{name}-qt.desktop
 %{_mandir}/man1/%{name}-qt.1*
-%{_qt4_translationdir}/*.qm
-
