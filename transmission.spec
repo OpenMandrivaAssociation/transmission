@@ -14,8 +14,8 @@ BuildRequires:	bzip2
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
 BuildRequires:	intltool
-BuildRequires:	pkgconfig(QtDBus) >= 4:4.6.0
-BuildRequires:	pkgconfig(QtGui) >= 4:4.6.0
+BuildRequires:	pkgconfig(QtDBus)
+BuildRequires:	pkgconfig(QtGui)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libevent)
 BuildRequires:	pkgconfig(openssl)
