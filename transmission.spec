@@ -2,7 +2,7 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.74
+Version:	2.75
 Release:	1
 License:	MIT and GPLv2
 Group:		Networking/File transfer
