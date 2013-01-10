@@ -2,14 +2,12 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.75
+Version:	2.76
 Release:	1
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 URL:		http://www.transmissionbt.com/
 Source0:	http://download.transmissionbt.com/files/%{name}-%{version}.tar.xz
-Patch0:		transmission-2.51-mdv-desktop.patch
-
 BuildRequires:	bzip2
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
@@ -97,6 +95,8 @@ This package contains the transmission-daemon.
 %prep
 %setup -q
 %apply_patches
+aclocal
+automake -a --add-missing
 
 %build
 %configure

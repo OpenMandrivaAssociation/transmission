@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   transmission-2.75.tar.xz: f04547a3bcc71aea5d66c4964926dfb030ab5ff3
+sources:
+  transmission-2.76.tar.xz: 364d89c40aeaad661193a287c2be39c3b2c4d2de
