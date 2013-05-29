@@ -3,10 +3,10 @@
 Summary:	Simple Bittorrent client
 Name:		transmission
 Version:	2.76
-Release:	2
+Release:	3
 License:	MIT and GPLv2
 Group:		Networking/File transfer
-URL:		http://www.transmissionbt.com/
+Url:		http://www.transmissionbt.com/
 Source0:	http://download.transmissionbt.com/files/%{name}-%{version}.tar.xz
 BuildRequires:	bzip2
 BuildRequires:	desktop-file-utils
