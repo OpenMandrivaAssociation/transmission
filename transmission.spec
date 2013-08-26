@@ -17,6 +17,7 @@ BuildRequires:	pkgconfig(QtGui)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libevent)
 BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(Qt5Core)
 
 %description
 Transmission is a free, lightweight BitTorrent client. It features a 
@@ -99,7 +100,7 @@ aclocal
 automake -a --add-missing
 
 %build
-%configure
+%configure2_5x
 %make
 
 #QT Gui
