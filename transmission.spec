@@ -2,7 +2,7 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.82
+Version:	2.81
 Release:	1
 License:	MIT and GPLv2
 Group:		Networking/File transfer
@@ -17,7 +17,6 @@ BuildRequires:	pkgconfig(QtGui)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libevent)
 BuildRequires:	pkgconfig(openssl)
-BuildRequires:	pkgconfig(Qt5Core)
 
 %description
 Transmission is a free, lightweight BitTorrent client. It features a 
