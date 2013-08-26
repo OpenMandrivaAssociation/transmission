@@ -2,7 +2,7 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.82
+Version:	2.81
 Release:	1
 License:	MIT and GPLv2
 Group:		Networking/File transfer
@@ -99,7 +99,7 @@ aclocal
 automake -a --add-missing
 
 %build
-%configure
+%configure2_5x
 %make
 
 #QT Gui
