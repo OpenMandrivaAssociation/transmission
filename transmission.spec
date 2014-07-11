@@ -3,7 +3,7 @@
 Summary:	Simple Bittorrent client
 Name:		transmission
 Version:	2.81
-Release:	6
+Release:	7
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
