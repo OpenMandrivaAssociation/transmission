@@ -2,8 +2,8 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.81
-Release:	7
+Version:	2.84
+Release:	1
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
@@ -160,4 +160,3 @@ cp -a qt/transmission-qt.desktop %{buildroot}/%{_datadir}/applications/
 %{_bindir}/%{name}-qt
 %{_datadir}/applications/%{name}-qt.desktop
 %{_mandir}/man1/%{name}-qt.1*
-
