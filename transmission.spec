@@ -1,13 +1,17 @@
-%bcond_without gtk
+%ifarch %{armx}
+%bcond_with	gtk
+%else
+%bcond_without	gtk
+%endif
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.81
-Release:	7
+Version:	2.84
+Release:	1
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
-Source0:	http://download.transmissionbt.com/files/%{name}-%{version}.tar.xz
+Source0:	https://transmission.cachefly.net/%{name}-%{version}.tar.xz
 BuildRequires:	bzip2
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
@@ -94,30 +98,28 @@ This package contains the transmission-daemon.
 
 %prep
 %setup -q
-%apply_patches
-aclocal
-automake -a --add-missing
 
 %build
-%configure2_5x
+%configure
 %make
 
 #QT Gui
 pushd qt
+export CXXFLAGS="-std=gnu++11"
 %qmake_qt4 qtr.pro
 %make
 popd
 
 %install
 %makeinstall_std
-%if %with gtk
+%if %{with gtk}
 %find_lang %{name}-gtk
-%endif
 
 mkdir -p %{buildroot}%{_iconsdir}/hicolor/{48x48,32x32,16x16}/apps
 convert -scale 48 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png 
 convert -scale 32 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
 convert -scale 16 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+%endif
 
 #Qt Gui Installation
 pushd qt
@@ -125,13 +127,15 @@ INSTALL_ROOT=%{buildroot}%{_prefix} make install
 popd
 
 # Install transmission-qt.desktop manually as make install doesn't install it:
-cp -a qt/transmission-qt.desktop %{buildroot}/%{_datadir}/applications/
+install -m644 qt/transmission-qt.desktop -D %{buildroot}%{_datadir}/applications/transmission-qt.desktop
 
 %files common
 %doc README NEWS AUTHORS
 %{_datadir}/%{name}
+%if %{with gtk}
 %{_datadir}/pixmaps/%{name}.png
 %{_iconsdir}/hicolor/*/apps/*
+%endif
 
 %files cli
 %{_bindir}/%{name}-cli
