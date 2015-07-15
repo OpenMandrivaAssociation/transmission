@@ -7,7 +7,7 @@
 Summary:	Simple Bittorrent client
 Name:		transmission
 Version:	2.84
-Release:	2
+Release:	3
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
@@ -16,11 +16,14 @@ BuildRequires:	bzip2
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
 BuildRequires:	intltool
-BuildRequires:	pkgconfig(QtDBus)
-BuildRequires:	pkgconfig(QtGui)
+BuildRequires:	pkgconfig(Qt5DBus)
+BuildRequires:	pkgconfig(Qt5Widgets)
+BuildRequires:	pkgconfig(Qt5Network)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libevent)
 BuildRequires:	pkgconfig(openssl)
+BuildRequires:	qmake5
+BuildRequires:	qt5-macros
 
 %description
 Transmission is a free, lightweight BitTorrent client. It features a 
@@ -70,13 +73,14 @@ simple, intuitive interface on top of an efficient back-end.
 This package provides the GTK Interface.
 %endif
 
-%package qt4
-Summary:	Qt4 Interface for Transmission BitTorrent client
+%package qt
+Summary:	Qt Interface for Transmission BitTorrent client
 Group:		Networking/File transfer
 Provides:	%{name}-gui = %{version}-%{release}
 Requires:	%{name}-common = %{version}
+%rename %{name}-qt4
 
-%description qt4
+%description qt
 Transmission is a simple BitTorrent client. It features a very simple,
 intuitive interface (gui and command-line) on top on an efficient,
 cross-platform back-end.
@@ -85,7 +89,7 @@ This package contains QTransmission, a QT4 based GUI for Transmission
 loosely based on the GTK+ client.
 
 %package daemon
-Summary:	Qt4 Interface for Transmission BitTorrent client
+Summary:	Qt Interface for Transmission BitTorrent client
 Group:		Networking/File transfer
 Requires:	%{name}-common = %{version}
 
@@ -106,7 +110,7 @@ This package contains the transmission-daemon.
 #QT Gui
 pushd qt
 export CXXFLAGS="-std=gnu++11"
-%qmake_qt4 qtr.pro
+%qmake_qt5 QMAKE_CC="%{__cc}" QMAKE_CXX="%{__cxx}" QMAKE_LINK="%{__cxx}" qtr.pro
 %make
 popd
 
@@ -160,7 +164,7 @@ install -m644 qt/transmission-qt.desktop -D %{buildroot}%{_datadir}/applications
 %{_mandir}/man1/%{name}-gtk.1*
 %endif
 
-%files qt4
+%files qt
 %{_bindir}/%{name}-qt
 %{_datadir}/applications/%{name}-qt.desktop
 %{_mandir}/man1/%{name}-qt.1*
