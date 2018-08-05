@@ -142,12 +142,12 @@ install -m644 qt/transmission-qt.desktop -D %{buildroot}%{_datadir}/applications
 %endif
 
 %files cli
-%{_bindir}/%{name}-cli
+#{_bindir}/%{name}-cli
 %{_bindir}/%{name}-create
 %{_bindir}/%{name}-edit
 %{_bindir}/%{name}-remote
 %{_bindir}/%{name}-show
-%{_mandir}/man1/%{name}-cli.1*
+#{_mandir}/man1/%{name}-cli.1*
 %{_mandir}/man1/%{name}-create.1*
 %{_mandir}/man1/%{name}-edit.1*
 %{_mandir}/man1/%{name}-remote.1*
