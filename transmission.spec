@@ -6,8 +6,8 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.84
-Release:	5
+Version:	2.94
+Release:	1
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
@@ -142,12 +142,12 @@ install -m644 qt/transmission-qt.desktop -D %{buildroot}%{_datadir}/applications
 %endif
 
 %files cli
-%{_bindir}/%{name}-cli
+#{_bindir}/%{name}-cli
 %{_bindir}/%{name}-create
 %{_bindir}/%{name}-edit
 %{_bindir}/%{name}-remote
 %{_bindir}/%{name}-show
-%{_mandir}/man1/%{name}-cli.1*
+#{_mandir}/man1/%{name}-cli.1*
 %{_mandir}/man1/%{name}-create.1*
 %{_mandir}/man1/%{name}-edit.1*
 %{_mandir}/man1/%{name}-remote.1*
