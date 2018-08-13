@@ -7,11 +7,16 @@
 Summary:	Simple Bittorrent client
 Name:		transmission
 Version:	2.94
-Release:	1
+Release:	2
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
 Source0:	https://transmission.cachefly.net/%{name}-%{version}.tar.xz
+Source1:	https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-symbolic.svg
+Patch0:		https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-fdlimits.patch
+Patch1:		https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-libsystemd.patch
+# Patch 1 from Fedora is incomplete, let's fix it up
+Patch2:		transmission-2.94-libsystemd-part2.patch
 BuildRequires:	bzip2
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
@@ -22,8 +27,10 @@ BuildRequires:	pkgconfig(Qt5Network)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libevent)
 BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	qmake5
 BuildRequires:	qt5-macros
+BuildRequires:	systemd-macros
 
 %description
 Transmission is a free, lightweight BitTorrent client. It features a 
@@ -101,10 +108,10 @@ cross-platform back-end.
 This package contains the transmission-daemon.
 
 %prep
-%setup -q
+%autosetup -p0
 
 %build
-%configure
+%configure --enable-utp --enable-daemon --with-systemd-daemon --enable-nls --enable-cli
 %make
 
 #QT Gui
@@ -116,6 +123,10 @@ popd
 
 %install
 %makeinstall_std
+
+mkdir -p %{buildroot}%{_unitdir}
+install -m0644 daemon/transmission-daemon.service %{buildroot}%{_unitdir}/
+
 %if %{with gtk}
 %find_lang %{name}-gtk
 
@@ -142,18 +153,19 @@ install -m644 qt/transmission-qt.desktop -D %{buildroot}%{_datadir}/applications
 %endif
 
 %files cli
-#{_bindir}/%{name}-cli
+%{_bindir}/%{name}-cli
 %{_bindir}/%{name}-create
 %{_bindir}/%{name}-edit
 %{_bindir}/%{name}-remote
 %{_bindir}/%{name}-show
-#{_mandir}/man1/%{name}-cli.1*
+%{_mandir}/man1/%{name}-cli.1*
 %{_mandir}/man1/%{name}-create.1*
 %{_mandir}/man1/%{name}-edit.1*
 %{_mandir}/man1/%{name}-remote.1*
 %{_mandir}/man1/%{name}-show.1*
 
 %files daemon
+%{_unitdir}/*.service
 %{_bindir}/%{name}-daemon
 %{_mandir}/man1/%{name}-daemon.1*
 
