@@ -7,7 +7,7 @@
 Summary:	Simple Bittorrent client
 Name:		transmission
 Version:	2.94
-Release:	3
+Release:	4
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
@@ -99,6 +99,8 @@ loosely based on the GTK+ client.
 Summary:	Qt Interface for Transmission BitTorrent client
 Group:		Networking/File transfer
 Requires:	%{name}-common = %{version}
+BuildRequires:	rpm-helper
+Requires(post,preun):	rpm-helper
 
 %description daemon
 Transmission is a simple BitTorrent client. It features a very simple,
@@ -106,6 +108,13 @@ intuitive interface (gui and command-line) on top on an efficient,
 cross-platform back-end.
 
 This package contains the transmission-daemon.
+
+%pre daemon
+%_pre_useradd transmission /var/lib/transmission /sbin/nologin
+
+%postun daemon
+%_postun_userdel transmission
+%_postun_groupdel transmission
 
 %prep
 %autosetup -p0
@@ -144,6 +153,8 @@ popd
 # Install transmission-qt.desktop manually as make install doesn't install it:
 install -m644 qt/transmission-qt.desktop -D %{buildroot}%{_datadir}/applications/transmission-qt.desktop
 
+mkdir -p %{buildroot}/var/lib/transmission
+
 %files common
 %doc README NEWS AUTHORS
 %{_datadir}/%{name}
@@ -168,6 +179,7 @@ install -m644 qt/transmission-qt.desktop -D %{buildroot}%{_datadir}/applications
 %{_unitdir}/*.service
 %{_bindir}/%{name}-daemon
 %{_mandir}/man1/%{name}-daemon.1*
+%attr(0775,transmission,transmission) /var/lib/transmission
 
 %if %with gtk
 %files gtk -f %{name}-gtk.lang
