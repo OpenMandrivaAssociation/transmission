@@ -152,7 +152,24 @@ popd
 # Install transmission-qt.desktop manually as make install doesn't install it:
 install -m644 qt/transmission-qt.desktop -D %{buildroot}%{_datadir}/applications/transmission-qt.desktop
 
-mkdir -p %{buildroot}/var/lib/transmission
+# Configure transmission-daemon
+sed -i -e 's,--log-error,--log-error --config-dir %{_sysconfdir}/transmission-daemon,' %{buildroot}/lib/systemd/system/transmission-daemon.service
+mkdir -p \
+	%{buildroot}/var/lib/transmission/download \
+	%{buildroot}/var/lib/transmission/incoming \
+	%{buildroot}/var/lib/transmission/torrents \
+	%{buildroot}%{_sysconfdir}/transmission-daemon
+cat >%{buildroot}%{_sysconfdir}/transmission-daemon/settings.json <<EOF
+{
+	"rpc-enabled": true,
+	"rpc-whitelist": "127.0.0.1,10.*.*.*,192.168.*.*",
+	"download-dir": "/var/lib/transmission/download",
+	"incomplete-dir-enabled": true,
+	"incomplete-dir": "/var/lib/transmission/incoming",
+	"watch-dir": "/var/lib/transmission/torrents"
+}
+EOF
+
 
 %files common
 %doc README NEWS AUTHORS
@@ -178,6 +195,7 @@ mkdir -p %{buildroot}/var/lib/transmission
 %{_unitdir}/*.service
 %{_bindir}/%{name}-daemon
 %{_mandir}/man1/%{name}-daemon.1*
+%{_sysconfdir}/transmission-daemon
 %attr(0775,transmission,transmission) /var/lib/transmission
 
 %if %with gtk
@@ -191,4 +209,3 @@ mkdir -p %{buildroot}/var/lib/transmission
 %{_bindir}/%{name}-qt
 %{_datadir}/applications/%{name}-qt.desktop
 %{_mandir}/man1/%{name}-qt.1*
-
