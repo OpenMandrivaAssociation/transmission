@@ -63,7 +63,6 @@ BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(gconf-2.0)
 BuildRequires:	pkgconfig(libcanberra-gtk)
 BuildRequires:	pkgconfig(libnotify)
-BuildRequires:	pkgconfig(ndesk-dbus-glib-1.0)
 Requires:	%{name}-common = %{version}
 Provides:	%{name} = %{version}-%{release}
 Provides:	%{name}-gui = %{version}-%{release}
