@@ -28,6 +28,7 @@ BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libevent)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(libsystemd)
+BuildRequires:	pkgconfig(zlib)
 BuildRequires:	qmake5
 BuildRequires:	qt5-macros
 BuildRequires:	systemd-macros
