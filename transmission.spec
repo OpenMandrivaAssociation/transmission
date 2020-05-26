@@ -6,12 +6,12 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	2.94
-Release:	4
+Version:	3.00
+Release:	1
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
-Source0:	https://transmission.cachefly.net/%{name}-%{version}.tar.xz
+Source0:	https://github.com/transmission/transmission-releases/raw/master/transmission-%{version}.tar.xz
 Source1:	https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-symbolic.svg
 Patch0:		https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-fdlimits.patch
 Patch1:		https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-libsystemd.patch
