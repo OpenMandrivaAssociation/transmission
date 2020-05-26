@@ -7,7 +7,7 @@
 Summary:	Simple Bittorrent client
 Name:		transmission
 Version:	3.00
-Release:	1
+Release:	2
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
@@ -25,6 +25,7 @@ BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libevent)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(libsystemd)
+BuildRequires:	pkgconfig(appindicator3-0.1)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	qmake5
 BuildRequires:	qt5-macros
@@ -60,6 +61,7 @@ Group:		Networking/File transfer
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(gconf-2.0)
 BuildRequires:	pkgconfig(libcanberra-gtk)
+BuildRequires:	pkgconfig(appindicator3-0.1)
 BuildRequires:	pkgconfig(libnotify)
 Requires:	%{name}-common = %{version}
 Provides:	%{name} = %{version}-%{release}
