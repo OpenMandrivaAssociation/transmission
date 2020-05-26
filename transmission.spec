@@ -1,5 +1,5 @@
 %ifarch %{armx}
-%bcond_with	gtk
+%bcond_without	gtk
 %else
 %bcond_without	gtk
 %endif
@@ -124,11 +124,11 @@ This package contains the transmission-daemon.
 pushd qt
 export CXXFLAGS="-std=gnu++11"
 %qmake_qt5 QMAKE_CC="%{__cc}" QMAKE_CXX="%{__cxx}" QMAKE_LINK="%{__cxx}" qtr.pro
-%make
+%make_build
 popd
 
 %install
-%makeinstall_std
+%make_install
 
 mkdir -p %{buildroot}%{_unitdir}
 install -m0644 daemon/transmission-daemon.service %{buildroot}%{_unitdir}/
@@ -175,6 +175,7 @@ EOF
 %if %{with gtk}
 %{_datadir}/pixmaps/%{name}.png
 %{_iconsdir}/hicolor/*/apps/*
+%{_datadir}/appdata/transmission-gtk.appdata.xml
 %endif
 
 %files cli
