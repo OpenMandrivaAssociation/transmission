@@ -14,9 +14,6 @@ Url:		http://www.transmissionbt.com/
 Source0:	https://github.com/transmission/transmission-releases/raw/master/transmission-%{version}.tar.xz
 Source1:	https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-symbolic.svg
 
-Patch1:		https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-libsystemd.patch
-# Patch 1 from Fedora is incomplete, let's fix it up
-Patch2:		transmission-2.94-libsystemd-part2.patch
 BuildRequires:	bzip2
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
