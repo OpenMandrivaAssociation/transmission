@@ -170,7 +170,7 @@ EOF
 
 
 %files common
-%doc README NEWS AUTHORS
+%doc AUTHORS
 %{_datadir}/%{name}
 %if %{with gtk}
 %{_datadir}/pixmaps/%{name}.png
