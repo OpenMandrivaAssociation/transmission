@@ -118,7 +118,7 @@ This package contains the transmission-daemon.
 
 %build
 %configure --enable-utp --enable-daemon --with-systemd-daemon --enable-nls --enable-cli
-%make
+%make_build
 
 #QT Gui
 pushd qt
