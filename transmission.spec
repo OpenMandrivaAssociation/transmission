@@ -1,8 +1,4 @@
-%ifarch %{armx}
-%bcond_without	gtk
-%else
-%bcond_without	gtk
-%endif
+%bcond_without gtk
 
 Summary:	Simple Bittorrent client
 Name:		transmission
@@ -29,7 +25,7 @@ BuildRequires:	pkgconfig(appindicator3-0.1)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	qmake5
 BuildRequires:	qt5-macros
-BuildRequires:	systemd-macros
+BuildRequires:	systemd-rpm-macros
 
 %description
 Transmission is a free, lightweight BitTorrent client. It features a 
@@ -153,12 +149,13 @@ popd
 install -m644 qt/transmission-qt.desktop -D %{buildroot}%{_datadir}/applications/transmission-qt.desktop
 
 # Configure transmission-daemon
-sed -i -e 's,--log-error,--log-error --config-dir %{_sysconfdir}/transmission-daemon,' %{buildroot}/lib/systemd/system/transmission-daemon.service
+sed -i -e 's,--log-error,--log-error --config-dir %{_sysconfdir}/transmission-daemon,' %{buildroot}%{_unitdir}/transmission-daemon.service
 mkdir -p \
 	%{buildroot}/var/lib/transmission/download \
 	%{buildroot}/var/lib/transmission/incoming \
 	%{buildroot}/var/lib/transmission/torrents \
 	%{buildroot}%{_sysconfdir}/transmission-daemon
+
 cat >%{buildroot}%{_sysconfdir}/transmission-daemon/settings.json <<EOF
 {
 	"rpc-enabled": true,
@@ -186,16 +183,16 @@ EOF
 %{_bindir}/%{name}-edit
 %{_bindir}/%{name}-remote
 %{_bindir}/%{name}-show
-%{_mandir}/man1/%{name}-cli.1*
-%{_mandir}/man1/%{name}-create.1*
-%{_mandir}/man1/%{name}-edit.1*
-%{_mandir}/man1/%{name}-remote.1*
-%{_mandir}/man1/%{name}-show.1*
+%doc %{_mandir}/man1/%{name}-cli.1*
+%doc %{_mandir}/man1/%{name}-create.1*
+%doc %{_mandir}/man1/%{name}-edit.1*
+%doc %{_mandir}/man1/%{name}-remote.1*
+%doc %{_mandir}/man1/%{name}-show.1*
 
 %files daemon
 %{_unitdir}/*.service
 %{_bindir}/%{name}-daemon
-%{_mandir}/man1/%{name}-daemon.1*
+%doc %{_mandir}/man1/%{name}-daemon.1*
 %{_sysconfdir}/transmission-daemon
 %attr(0775,transmission,transmission) /var/lib/transmission
 
@@ -203,10 +200,10 @@ EOF
 %files gtk -f %{name}-gtk.lang
 %{_bindir}/%{name}-gtk
 %{_datadir}/applications/%{name}-gtk.desktop
-%{_mandir}/man1/%{name}-gtk.1*
+%doc %{_mandir}/man1/%{name}-gtk.1*
 %endif
 
 %files qt
 %{_bindir}/%{name}-qt
 %{_datadir}/applications/%{name}-qt.desktop
-%{_mandir}/man1/%{name}-qt.1*
+%doc %{_mandir}/man1/%{name}-qt.1*
