@@ -9,6 +9,7 @@ Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
 Source0:	https://github.com/transmission/transmission-releases/raw/master/transmission-%{version}.tar.xz
 Source1:	https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-symbolic.svg
+Patch0:		transmission-3.00-no-Llib.patch
 
 BuildRequires:	bzip2
 BuildRequires:	desktop-file-utils
@@ -112,7 +113,7 @@ This package contains the transmission-daemon.
 %_postun_groupdel transmission
 
 %prep
-%autosetup -p0
+%autosetup -p1
 
 %build
 %configure --enable-utp --enable-daemon --with-systemd-daemon --enable-nls --enable-cli
