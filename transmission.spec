@@ -7,7 +7,7 @@ Release:	0.beta2.1
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
-Source0:	https://github.com/transmission/transmission-releases/raw/master/transmission-%{version}-beta2.tar.gz
+Source0:	https://github.com/transmission/transmission-releases/raw/master/transmission-%{version}-beta.2.tar.gz
 Source1:	https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-symbolic.svg
 Patch0:		transmission-3.00-no-Llib.patch
 
@@ -115,7 +115,7 @@ This package contains the transmission-daemon.
 %_postun_groupdel transmission
 
 %prep
-%autosetup -n %{name}-%{version}-beta2 -p1
+%autosetup -n %{name}-%{version}-beta.2 -p1
 
 %build
 %cmake	\
