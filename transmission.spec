@@ -9,7 +9,7 @@ Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
 Source0:	https://github.com/transmission/transmission-releases/raw/master/transmission-%{version}-beta.2.tar.gz
 Source1:	https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-symbolic.svg
-Patch0:		transmission-3.00-no-Llib.patch
+#Patch0:		transmission-3.00-no-Llib.patch
 
 BuildRequires:	bzip2
 BuildRequires:	desktop-file-utils
