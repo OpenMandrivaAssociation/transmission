@@ -2,12 +2,12 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	3.00
-Release:	4
+Version:	4.0.0
+Release:	0.beta2.1
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
-Source0:	https://github.com/transmission/transmission-releases/raw/master/transmission-%{version}.tar.xz
+Source0:	https://github.com/transmission/transmission-releases/raw/master/transmission-%{version}-beta2.tar.gz
 Source1:	https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-symbolic.svg
 Patch0:		transmission-3.00-no-Llib.patch
 
@@ -56,6 +56,8 @@ contains the command line interface front-end.
 Summary:	GTK Interface for Transmission BitTorrent client
 Group:		Networking/File transfer
 BuildRequires:	pkgconfig(gtk+-2.0)
+BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(gtk4)
 BuildRequires:	pkgconfig(gconf-2.0)
 BuildRequires:	pkgconfig(libcanberra-gtk)
 BuildRequires:	pkgconfig(appindicator3-0.1)
@@ -113,21 +115,18 @@ This package contains the transmission-daemon.
 %_postun_groupdel transmission
 
 %prep
-%autosetup -p1
+%autosetup -n %{name}-%{version}-beta2 -p1
 
 %build
-%configure --enable-utp --enable-daemon --with-systemd-daemon --enable-nls --enable-cli
+%cmake	\
+	-DENABLE_GTK=ON \
+	-DENABLE_QT=ON \
+	-DENABLE_CLI=ON
 %make_build
 
-#QT Gui
-pushd qt
-export CXXFLAGS="-std=gnu++11"
-%qmake_qt5 QMAKE_CC="%{__cc}" QMAKE_CXX="%{__cxx}" QMAKE_LINK="%{__cxx}" qtr.pro
-%make_build
-popd
 
 %install
-%make_install
+%make_install -C build
 
 mkdir -p %{buildroot}%{_unitdir}
 install -m0644 daemon/transmission-daemon.service %{buildroot}%{_unitdir}/
