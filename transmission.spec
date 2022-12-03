@@ -15,6 +15,7 @@ BuildRequires:	bzip2
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
 BuildRequires:	intltool
+BuildRequires:	gtest-source
 BuildRequires:	qt6-qttools-linguist
 BuildRequires:	cmake(Qt6Linguist)
 BuildRequires:	qt6-cmake
