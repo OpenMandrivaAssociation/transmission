@@ -15,9 +15,9 @@ BuildRequires:	bzip2
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
 BuildRequires:	intltool
-BuildRequires:	pkgconfig(Qt6DBus)
-BuildRequires:	pkgconfig(Qt6Widgets)
-BuildRequires:	pkgconfig(Qt6Network)
+BuildRequires:	cmake(Qt6DBus)
+BuildRequires:	cmake(Qt6Widgets)
+BuildRequires:	cmake(Qt6Network)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libevent)
 BuildRequires:	pkgconfig(openssl)
