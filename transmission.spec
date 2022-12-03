@@ -17,11 +17,16 @@ BuildRequires:	imagemagick
 BuildRequires:	intltool
 BuildRequires:	qt6-qttools-linguist
 BuildRequires:	cmake(Qt6Linguist)
+BuildRequires:	qt6-cmake
+BuildRequires:	cmake(Qt6)
 BuildRequires:	cmake(Qt6Core)
 BuildRequires:	cmake(Qt6DBus)
 BuildRequires:	cmake(Qt6Gui)
+BuildRequires:  cmake(Qt6Svg)
+BuildRequires:	cmake(Qt6OpenGL)
 BuildRequires:	cmake(Qt6Widgets)
 BuildRequires:	cmake(Qt6Network)
+BuildRequires:  cmake(Qt6Xml)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libevent)
 BuildRequires:	pkgconfig(openssl)
