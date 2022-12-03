@@ -18,7 +18,7 @@ BuildRequires:	intltool
 BuildRequires:	qt6-qttools-linguist
 BuildRequires:	cmake(Qt6Core)
 BuildRequires:	cmake(Qt6DBus)
-BuildRequires:	cmake(QtGui)
+BuildRequires:	cmake(Qt6Gui)
 BuildRequires:	cmake(Qt6Widgets)
 BuildRequires:	cmake(Qt6Network)
 BuildRequires:	pkgconfig(libcurl)
