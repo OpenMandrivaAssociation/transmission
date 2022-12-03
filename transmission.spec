@@ -15,9 +15,9 @@ BuildRequires:	bzip2
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
 BuildRequires:	intltool
-BuildRequires:	pkgconfig(Qt5DBus)
-BuildRequires:	pkgconfig(Qt5Widgets)
-BuildRequires:	pkgconfig(Qt5Network)
+BuildRequires:	pkgconfig(Qt6DBus)
+BuildRequires:	pkgconfig(Qt6Widgets)
+BuildRequires:	pkgconfig(Qt6Network)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libevent)
 BuildRequires:	pkgconfig(openssl)
@@ -122,6 +122,7 @@ This package contains the transmission-daemon.
 %cmake	\
 	-DENABLE_GTK=ON \
 	-DENABLE_QT=ON \
+	-DUSE_QT_VERSION=6 \
 	-DENABLE_CLI=ON
 %make_build
 
