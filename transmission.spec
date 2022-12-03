@@ -16,6 +16,17 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
 BuildRequires:	intltool
 #BuildRequires:	gtest-source
+BuildRequires:	miniupnpc-devel
+BuildRequires:	libnatpmp-devel
+BuildRequires:	pkgconfig(libcurl)
+BuildRequires:	pkgconfig(libdeflate)
+BuildRequires:	pkgconfig(libevent)
+BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(libsystemd)
+BuildRequires:	pkgconfig(zlib)
+BuildRequires:	systemd-rpm-macros
+
+# Qt
 BuildRequires:	qt6-qttools-linguist
 BuildRequires:	cmake(Qt6Linguist)
 BuildRequires:	qt6-cmake
@@ -28,11 +39,9 @@ BuildRequires:	cmake(Qt6OpenGL)
 BuildRequires:	cmake(Qt6Widgets)
 BuildRequires:	cmake(Qt6Network)
 BuildRequires:  cmake(Qt6Xml)
-BuildRequires:	pkgconfig(libcurl)
-BuildRequires:	pkgconfig(libevent)
-BuildRequires:	pkgconfig(openssl)
-BuildRequires:	pkgconfig(libsystemd)
-BuildRequires:	pkgconfig(zlib)
+BuildRequires:	qmake5
+BuildRequires:	qt5-macros
+
 # GTK
 BuildRequires:	pkgconfig(gtk4)
 BuildRequires:	pkgconfig(gconf-2.0)
@@ -41,9 +50,6 @@ BuildRequires:	pkgconfig(appindicator3-0.1)
 BuildRequires:	pkgconfig(libnotify)
 BuildRequires:	pkgconfig(gtkmm-4.0)
 BuildRequires:	pkgconfig(glibmm-2.68)
-BuildRequires:	qmake5
-BuildRequires:	qt5-macros
-BuildRequires:	systemd-rpm-macros
 
 %description
 Transmission is a free, lightweight BitTorrent client. It features a 
