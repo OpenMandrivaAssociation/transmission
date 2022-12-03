@@ -22,8 +22,15 @@ BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libevent)
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(libsystemd)
-BuildRequires:	pkgconfig(appindicator3-0.1)
 BuildRequires:	pkgconfig(zlib)
+# GTK
+BuildRequires:	pkgconfig(gtk4)
+BuildRequires:	pkgconfig(gconf-2.0)
+BuildRequires:	pkgconfig(libcanberra-gtk)
+BuildRequires:	pkgconfig(appindicator3-0.1)
+BuildRequires:	pkgconfig(libnotify)
+BuildRequires:	pkgconfig(gtkmm-4.0)
+BuildRequires:	pkgconfig(glibmm-2.68)
 BuildRequires:	qmake5
 BuildRequires:	qt5-macros
 BuildRequires:	systemd-rpm-macros
@@ -55,13 +62,7 @@ contains the command line interface front-end.
 %package gtk
 Summary:	GTK Interface for Transmission BitTorrent client
 Group:		Networking/File transfer
-BuildRequires:	pkgconfig(gtk+-2.0)
-BuildRequires:	pkgconfig(gtk+-3.0)
-BuildRequires:	pkgconfig(gtk4)
-BuildRequires:	pkgconfig(gconf-2.0)
-BuildRequires:	pkgconfig(libcanberra-gtk)
-BuildRequires:	pkgconfig(appindicator3-0.1)
-BuildRequires:	pkgconfig(libnotify)
+
 Requires:	%{name}-common = %{version}
 Provides:	%{name} = %{version}-%{release}
 Provides:	%{name}-gui = %{version}-%{release}
