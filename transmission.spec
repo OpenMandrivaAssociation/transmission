@@ -15,7 +15,7 @@ BuildRequires:	bzip2
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
 BuildRequires:	intltool
-BuildRequires:	gtest-source
+#BuildRequires:	gtest-source
 BuildRequires:	qt6-qttools-linguist
 BuildRequires:	cmake(Qt6Linguist)
 BuildRequires:	qt6-cmake
@@ -133,7 +133,8 @@ This package contains the transmission-daemon.
 	-DENABLE_GTK=ON \
 	-DENABLE_QT=ON \
 	-DUSE_QT_VERSION=6 \
-	-DENABLE_CLI=ON
+	-DENABLE_CLI=ON \
+	-DENABLE_TESTS=OFF
 %make_build
 
 
