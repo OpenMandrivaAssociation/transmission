@@ -13,6 +13,7 @@ Source1:	https://github.com/transmission/libutp/archive/libutp-bf695bdfb047cdca9
 Source2:	https://github.com/transmission/libb64/archive/libb64-91a38519cb18d3869b4f1c99b0a80726547054af.tar.gz
 #Patch0:		transmission-3.00-no-Llib.patch
 
+BuildRequires:	dht
 BuildRequires:	bzip2
 BuildRequires:	desktop-file-utils
 BuildRequires:	imagemagick
@@ -23,8 +24,9 @@ BuildRequires:	libnatpmp-devel
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libdeflate)
 BuildRequires:	pkgconfig(libevent)
-BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(libpsl)
 BuildRequires:	pkgconfig(libsystemd)
+BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	systemd-rpm-macros
 
