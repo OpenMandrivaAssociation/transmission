@@ -134,7 +134,7 @@ This package contains the transmission-daemon.
 %_postun_groupdel transmission
 
 %prep
-%setup -a1 -a2 -q -n %{name}-%{version}-beta.2 -p1
+%setup -a1 -a2 -q -n %{name}-%{version}-beta.2
 
 mv libutp-bf695bdfb047cdca9710ea9cffc4018669cf9548/* third-party/
 mv libb64-91a38519cb18d3869b4f1c99b0a80726547054af/* third-party/
