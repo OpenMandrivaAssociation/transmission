@@ -9,8 +9,8 @@ Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
 Source0:	https://github.com/transmission/transmission-releases/raw/master/transmission-%{version}-beta.2.tar.gz
 #Source1:	https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-symbolic.svg
-Source1:	https://github.com/transmission/libutp/archive/bf695bdfb047cdca9710ea9cffc4018669cf9548.tar.gz
-Source2:	https://github.com/transmission/libb64/archive/91a38519cb18d3869b4f1c99b0a80726547054af.tar.gz
+Source1:	https://github.com/transmission/libutp/archive/libutp-bf695bdfb047cdca9710ea9cffc4018669cf9548.tar.gz
+Source2:	https://github.com/transmission/libb64/archive/libb64-91a38519cb18d3869b4f1c99b0a80726547054af.tar.gz
 #Patch0:		transmission-3.00-no-Llib.patch
 
 BuildRequires:	bzip2
