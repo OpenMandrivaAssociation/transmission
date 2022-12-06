@@ -226,8 +226,8 @@ install -m0644 daemon/transmission-daemon.service %{buildroot}%{_unitdir}/
 %{_unitdir}/*.service
 %{_bindir}/%{name}-daemon
 %doc %{_mandir}/man1/%{name}-daemon.1*
-%{_sysconfdir}/transmission-daemon
-%attr(0775,transmission,transmission) /var/lib/transmission
+#{_sysconfdir}/transmission-daemon
+#attr(0775,transmission,transmission) /var/lib/transmission
 
 %if %with gtk
 %files gtk -f %{name}-gtk.lang
