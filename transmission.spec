@@ -11,6 +11,7 @@ Source0:	https://github.com/transmission/transmission-releases/raw/master/transm
 #Source1:	https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-symbolic.svg
 Source1:	https://github.com/transmission/libutp/archive/libutp-bf695bdfb047cdca9710ea9cffc4018669cf9548.tar.gz
 Source2:	https://github.com/transmission/libb64/archive/libb64-91a38519cb18d3869b4f1c99b0a80726547054af.tar.gz
+Source3:	https://github.com/transmission/wide-integer/archive/wide-integer-4de0b52ea939bada26fae7aef55a4d98eb1d8abb.zip
 #Patch0:		transmission-3.00-no-Llib.patch
 
 BuildRequires:	dht
@@ -141,6 +142,7 @@ This package contains the transmission-daemon.
 
 mv libutp-bf695bdfb047cdca9710ea9cffc4018669cf9548/* third-party/libutp/
 mv libb64-91a38519cb18d3869b4f1c99b0a80726547054af/* third-party/libb64/
+mv wide-integer-4de0b52ea939bada26fae7aef55a4d98eb1d8abb/* third-party/wide-integer/
 
 %build
 %cmake	\
