@@ -202,12 +202,13 @@ install -m0644 daemon/transmission-daemon.service %{buildroot}%{_unitdir}/
 
 
 %files common
-%doc AUTHORS
+#doc AUTHORS
+%doc %{_datadir}/doc/transmission/
 %{_datadir}/%{name}
 %if %{with gtk}
 #{_datadir}/pixmaps/%{name}.png
 %{_iconsdir}/hicolor/*/apps/*
-#{_datadir}/appdata/transmission-gtk.appdata.xml
+%{_datadir}/metainfo/transmission-gtk.metainfo.xml
 %endif
 
 %files cli
