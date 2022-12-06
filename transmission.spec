@@ -22,6 +22,7 @@ BuildRequires:	intltool
 #BuildRequires:	gtest-source
 BuildRequires:	miniupnpc-devel
 BuildRequires:	libnatpmp-devel
+BuildRequires:	cmake(utf8cpp)
 BuildRequires:	pkgconfig(fmt)
 BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libdeflate)
