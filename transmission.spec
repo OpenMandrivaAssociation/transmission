@@ -205,9 +205,9 @@ install -m0644 daemon/transmission-daemon.service %{buildroot}%{_unitdir}/
 %doc AUTHORS
 %{_datadir}/%{name}
 %if %{with gtk}
-%{_datadir}/pixmaps/%{name}.png
+#{_datadir}/pixmaps/%{name}.png
 %{_iconsdir}/hicolor/*/apps/*
-%{_datadir}/appdata/transmission-gtk.appdata.xml
+#{_datadir}/appdata/transmission-gtk.appdata.xml
 %endif
 
 %files cli
