@@ -2,18 +2,17 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	4.0.0
-Release:	0.beta2.1
+Version:	4.0.0.beta.2
+Release:	1
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
-Source0:	https://github.com/transmission/transmission-releases/raw/master/transmission-%{version}-beta.2.tar.gz
-#Source1:	https://src.fedoraproject.org/rpms/transmission/raw/master/f/transmission-symbolic.svg
+Source0:	https://github.com/transmission/transmission/archive/refs/tags/4.0.0-beta.2/%{name}-4.0.0-beta.2.tar.gz
+# Submodules, needed because source code tag was release without it. 
 Source1:	https://github.com/transmission/libutp/archive/libutp-bf695bdfb047cdca9710ea9cffc4018669cf9548.tar.gz
 Source2:	https://github.com/transmission/libb64/archive/libb64-91a38519cb18d3869b4f1c99b0a80726547054af.tar.gz
 Source3:	https://github.com/transmission/wide-integer/archive/wide-integer-4de0b52ea939bada26fae7aef55a4d98eb1d8abb.tar.gz
 Source4:	https://github.com/transmission/fast_float/archive/fast_float-662497742fea7055f0e0ee27e5a7ddc382c2c38e.tar.gz
-#Patch0:		transmission-3.00-no-Llib.patch
 
 BuildRequires:	dht
 BuildRequires:	bzip2
@@ -90,6 +89,7 @@ Group:		Networking/File transfer
 Requires:	%{name}-common = %{version}
 Provides:	%{name} = %{version}-%{release}
 Provides:	%{name}-gui = %{version}-%{release}
+Requires:	%{name}-daemon = %{version}-%{release}
 Obsoletes:	transmission < 1.74-1
 # Old, unmaintained clients that used old wx: transmission is as good
 # an upgrade path as any - AdamW 2008/12
@@ -108,7 +108,8 @@ Summary:	Qt Interface for Transmission BitTorrent client
 Group:		Networking/File transfer
 Provides:	%{name}-gui = %{version}-%{release}
 Requires:	%{name}-common = %{version}
-%rename %{name}-qt4
+Requires:	%{name}-daemon = %{version}-%{release}
+%rename %{name}-qt6
 
 %description qt
 Transmission is a simple BitTorrent client. It features a very simple,
@@ -140,7 +141,7 @@ This package contains the transmission-daemon.
 %_postun_groupdel transmission
 
 %prep
-%setup -a1 -a2 -a3 -a4 -q -n %{name}-%{version}-beta.2
+%setup -a1 -a2 -a3 -a4 -q -n %{name}-4.0.0-beta.2
 
 mv libutp-bf695bdfb047cdca9710ea9cffc4018669cf9548/* third-party/libutp/
 mv libb64-91a38519cb18d3869b4f1c99b0a80726547054af/* third-party/libb64/
@@ -166,47 +167,12 @@ install -m0644 daemon/transmission-daemon.service %{buildroot}%{_unitdir}/
 
 %if %{with gtk}
 %find_lang %{name}-gtk
-
-#mkdir -p %{buildroot}%{_iconsdir}/hicolor/{48x48,32x32,16x16}/apps
-#convert -scale 48 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png 
-#convert -scale 32 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-#convert -scale 16 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 %endif
 
-#Qt Gui Installation
-#pushd qt
-#INSTALL_ROOT=%{buildroot}%{_prefix} make install
-#popd
-
-# Install transmission-qt.desktop manually as make install doesn't install it:
-#install -m644 qt/transmission-qt.desktop -D %{buildroot}%{_datadir}/applications/transmission-qt.desktop
-
-# Configure transmission-daemon
-#sed -i -e 's,--log-error,--log-error --config-dir %{_sysconfdir}/transmission-daemon,' %{buildroot}%{_unitdir}/transmission-daemon.service
-#mkdir -p \
-#	%{buildroot}/var/lib/transmission/download \
-#	%{buildroot}/var/lib/transmission/incoming \
-#	%{buildroot}/var/lib/transmission/torrents \
-#	%{buildroot}%{_sysconfdir}/transmission-daemon
-
-#cat >%{buildroot}%{_sysconfdir}/transmission-daemon/settings.json <<EOF
-#{
-#	"rpc-enabled": true,
-#	"rpc-whitelist": "127.0.0.1,10.*.*.*,192.168.*.*",
-#	"download-dir": "/var/lib/transmission/download",
-#	"incomplete-dir-enabled": true,
-#	"incomplete-dir": "/var/lib/transmission/incoming",
-#	"watch-dir": "/var/lib/transmission/torrents"
-#}
-#EOF
-
-
 %files common
-#doc AUTHORS
 %doc %{_datadir}/doc/transmission/
 %{_datadir}/%{name}
 %if %{with gtk}
-#{_datadir}/pixmaps/%{name}.png
 %{_iconsdir}/hicolor/*/apps/*
 %{_datadir}/metainfo/transmission-gtk.metainfo.xml
 %endif
@@ -217,27 +183,25 @@ install -m0644 daemon/transmission-daemon.service %{buildroot}%{_unitdir}/
 %{_bindir}/%{name}-edit
 %{_bindir}/%{name}-remote
 %{_bindir}/%{name}-show
-%doc %{_mandir}/man1/%{name}-cli.1*
-%doc %{_mandir}/man1/%{name}-create.1*
-%doc %{_mandir}/man1/%{name}-edit.1*
-%doc %{_mandir}/man1/%{name}-remote.1*
-%doc %{_mandir}/man1/%{name}-show.1*
+%{_mandir}/man1/%{name}-cli.1*
+%{_mandir}/man1/%{name}-create.1*
+%{_mandir}/man1/%{name}-edit.1*
+%{_mandir}/man1/%{name}-remote.1*
+%{_mandir}/man1/%{name}-show.1*
 
 %files daemon
 %{_unitdir}/*.service
 %{_bindir}/%{name}-daemon
-%doc %{_mandir}/man1/%{name}-daemon.1*
-#{_sysconfdir}/transmission-daemon
-#attr(0775,transmission,transmission) /var/lib/transmission
+%{_mandir}/man1/%{name}-daemon.1*
 
 %if %with gtk
 %files gtk -f %{name}-gtk.lang
 %{_bindir}/%{name}-gtk
 %{_datadir}/applications/%{name}-gtk.desktop
-%doc %{_mandir}/man1/%{name}-gtk.1*
+%{_mandir}/man1/%{name}-gtk.1*
 %endif
 
 %files qt
 %{_bindir}/%{name}-qt
 %{_datadir}/applications/%{name}-qt.desktop
-%doc %{_mandir}/man1/%{name}-qt.1*
+%{_mandir}/man1/%{name}-qt.1*
