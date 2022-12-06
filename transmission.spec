@@ -167,38 +167,38 @@ install -m0644 daemon/transmission-daemon.service %{buildroot}%{_unitdir}/
 %if %{with gtk}
 %find_lang %{name}-gtk
 
-mkdir -p %{buildroot}%{_iconsdir}/hicolor/{48x48,32x32,16x16}/apps
-convert -scale 48 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png 
-convert -scale 32 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-convert -scale 16 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+#mkdir -p %{buildroot}%{_iconsdir}/hicolor/{48x48,32x32,16x16}/apps
+#convert -scale 48 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png 
+#convert -scale 32 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+#convert -scale 16 %{buildroot}/usr/share/pixmaps/transmission.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 %endif
 
 #Qt Gui Installation
-pushd qt
-INSTALL_ROOT=%{buildroot}%{_prefix} make install
-popd
+#pushd qt
+#INSTALL_ROOT=%{buildroot}%{_prefix} make install
+#popd
 
 # Install transmission-qt.desktop manually as make install doesn't install it:
-install -m644 qt/transmission-qt.desktop -D %{buildroot}%{_datadir}/applications/transmission-qt.desktop
+#install -m644 qt/transmission-qt.desktop -D %{buildroot}%{_datadir}/applications/transmission-qt.desktop
 
 # Configure transmission-daemon
-sed -i -e 's,--log-error,--log-error --config-dir %{_sysconfdir}/transmission-daemon,' %{buildroot}%{_unitdir}/transmission-daemon.service
-mkdir -p \
-	%{buildroot}/var/lib/transmission/download \
-	%{buildroot}/var/lib/transmission/incoming \
-	%{buildroot}/var/lib/transmission/torrents \
-	%{buildroot}%{_sysconfdir}/transmission-daemon
+#sed -i -e 's,--log-error,--log-error --config-dir %{_sysconfdir}/transmission-daemon,' %{buildroot}%{_unitdir}/transmission-daemon.service
+#mkdir -p \
+#	%{buildroot}/var/lib/transmission/download \
+#	%{buildroot}/var/lib/transmission/incoming \
+#	%{buildroot}/var/lib/transmission/torrents \
+#	%{buildroot}%{_sysconfdir}/transmission-daemon
 
-cat >%{buildroot}%{_sysconfdir}/transmission-daemon/settings.json <<EOF
-{
-	"rpc-enabled": true,
-	"rpc-whitelist": "127.0.0.1,10.*.*.*,192.168.*.*",
-	"download-dir": "/var/lib/transmission/download",
-	"incomplete-dir-enabled": true,
-	"incomplete-dir": "/var/lib/transmission/incoming",
-	"watch-dir": "/var/lib/transmission/torrents"
-}
-EOF
+#cat >%{buildroot}%{_sysconfdir}/transmission-daemon/settings.json <<EOF
+#{
+#	"rpc-enabled": true,
+#	"rpc-whitelist": "127.0.0.1,10.*.*.*,192.168.*.*",
+#	"download-dir": "/var/lib/transmission/download",
+#	"incomplete-dir-enabled": true,
+#	"incomplete-dir": "/var/lib/transmission/incoming",
+#	"watch-dir": "/var/lib/transmission/torrents"
+#}
+#EOF
 
 
 %files common
