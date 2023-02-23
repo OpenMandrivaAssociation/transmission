@@ -2,17 +2,19 @@
 
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	4.0.0.beta.2
+Version:	4.0.1
 Release:	1
 License:	MIT and GPLv2
 Group:		Networking/File transfer
 Url:		http://www.transmissionbt.com/
-Source0:	https://github.com/transmission/transmission/archive/refs/tags/4.0.0-beta.2/%{name}-4.0.0-beta.2.tar.gz
+Source0:	https://github.com/transmission/transmission/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
 # Submodules, needed because source code tag was release without it. 
-Source1:	https://github.com/transmission/libutp/archive/libutp-bf695bdfb047cdca9710ea9cffc4018669cf9548.tar.gz
-Source2:	https://github.com/transmission/libb64/archive/libb64-91a38519cb18d3869b4f1c99b0a80726547054af.tar.gz
-Source3:	https://github.com/transmission/wide-integer/archive/wide-integer-4de0b52ea939bada26fae7aef55a4d98eb1d8abb.tar.gz
-Source4:	https://github.com/transmission/fast_float/archive/fast_float-662497742fea7055f0e0ee27e5a7ddc382c2c38e.tar.gz
+Source1:	https://github.com/transmission/libutp/archive/refs/heads/post-3.4-transmission.tar.gz
+Source2:	https://github.com/transmission/libb64/archive/refs/heads/post-2.0.0-transmission.tar.gz
+Source3:	https://github.com/transmission/wide-integer/archive/refs/heads/master.tar.gz
+Source4:	https://github.com/transmission/fast_float/archive/refs/heads/main.tar.gz
+Source5:	https://github.com/transmission/utfcpp/archive/refs/heads/post-3.2.1-transmission.tar.gz
+Source6:	https://github.com/transmission/fmt/archive/refs/heads/9-x-y.tar.gz
 
 BuildRequires:	dht
 BuildRequires:	bzip2
@@ -141,12 +143,16 @@ This package contains the transmission-daemon.
 %_postun_groupdel transmission
 
 %prep
-%setup -a1 -a2 -a3 -a4 -q -n %{name}-4.0.0-beta.2
+%setup -a1 -a2 -a3 -a4 -a5 -a6 -q
 
-mv libutp-bf695bdfb047cdca9710ea9cffc4018669cf9548/* third-party/libutp/
-mv libb64-91a38519cb18d3869b4f1c99b0a80726547054af/* third-party/libb64/
-mv wide-integer-4de0b52ea939bada26fae7aef55a4d98eb1d8abb/* third-party/wide-integer/
-mv fast_float-662497742fea7055f0e0ee27e5a7ddc382c2c38e/* third-party/fast_float/
+mv libutp-*/* third-party/libutp/
+mv libb64-*/* third-party/libb64/
+mv wide-integer-*/* third-party/wide-integer/
+mv fast_float-*/* third-party/fast_float/
+mv utfcpp-*/* third-party/utfcpp/
+mv fmt-*/* third-party/fmt/
+
+%autopatch -p1
 
 
 %build
