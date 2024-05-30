@@ -1,12 +1,10 @@
-%bcond_without gtk
-
 Summary:	Simple Bittorrent client
 Name:		transmission
-Version:	4.0.5
-Release:	2
+Version:	4.0.6
+Release:	1
 License:	MIT and GPLv2
 Group:		Networking/File transfer
-Url:		http://www.transmissionbt.com/
+Url:		https://www.transmissionbt.com/
 Source0:	https://github.com/transmission/transmission/releases/download/%{version}/transmission-%{version}.tar.xz
 # Neede if compiled without tarball
 #Source0:	https://github.com/transmission/transmission/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
@@ -85,7 +83,6 @@ Conflicts:	transmission < 1.74
 Transmission is a free, lightweight BitTorrent client. This package
 contains the command line interface front-end.
 
-%if %with gtk
 %package gtk
 Summary:	GTK Interface for Transmission BitTorrent client
 Group:		Networking/File transfer
@@ -105,7 +102,6 @@ Transmission is a free, lightweight BitTorrent client. It features a
 simple, intuitive interface on top of an efficient back-end.
 
 This package provides the GTK Interface.
-%endif
 
 %package qt
 Summary:	Qt Interface for Transmission BitTorrent client
