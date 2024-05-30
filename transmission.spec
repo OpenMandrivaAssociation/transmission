@@ -171,17 +171,13 @@ This package contains the transmission-daemon.
 mkdir -p %{buildroot}%{_unitdir}
 install -m0644 daemon/transmission-daemon.service %{buildroot}%{_unitdir}/
 
-%if %{with gtk}
 %find_lang %{name}-gtk
-%endif
 
 %files common
 %doc %{_datadir}/doc/transmission/
 %{_datadir}/%{name}
-%if %{with gtk}
 %{_iconsdir}/hicolor/*/apps/*
 %{_datadir}/metainfo/transmission-gtk.metainfo.xml
-%endif
 
 %files cli
 %{_bindir}/%{name}-cli
@@ -200,12 +196,10 @@ install -m0644 daemon/transmission-daemon.service %{buildroot}%{_unitdir}/
 %{_bindir}/%{name}-daemon
 %{_mandir}/man1/%{name}-daemon.1*
 
-%if %with gtk
 %files gtk -f %{name}-gtk.lang
 %{_bindir}/%{name}-gtk
 %{_datadir}/applications/%{name}-gtk.desktop
 %{_mandir}/man1/%{name}-gtk.1*
-%endif
 
 %files qt
 %{_bindir}/%{name}-qt
