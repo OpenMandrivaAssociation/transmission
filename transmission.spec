@@ -168,8 +168,8 @@ This package contains the transmission-daemon.
 %install
 %make_install -C build
 
-mkdir -p %{buildroot}%{_unitdir}
-install -m0644 daemon/transmission-daemon.service %{buildroot}%{_unitdir}/
+#mkdir -p %{buildroot}%{_unitdir}
+#install -m0644 daemon/transmission-daemon.service %{buildroot}%{_unitdir}/
 
 %find_lang %{name}-gtk
 
